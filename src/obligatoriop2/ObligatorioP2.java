@@ -16,6 +16,7 @@ public class ObligatorioP2 {
      */
     public static void main(String[] args) {
         System.out.println("hola, probando cambio");
+        System.out.println("seba ");
     }
     
 }
