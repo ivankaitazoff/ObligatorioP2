@@ -3,19 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package obligatoriop2;
+package dominio;
 
 /**
  *
  * @author ivan
  */
-public class ObligatorioP2 {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        Interfaz.menuPrincipal();
-    }
+public class Juego {
     
 }
