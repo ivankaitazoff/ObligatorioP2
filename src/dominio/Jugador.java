@@ -13,17 +13,21 @@ public class Jugador {
     private String nombre;
     private int edad;
     private String alias;
-    private char letraJugador;
+    private String letraJugador;
     private int puntaje;
 
-    public Jugador(String nombre, int edad, String alias, char letraJugador, int puntaje) {
+    public Jugador(String nombre, int edad, String alias, String letraJugador, int puntaje) {
         this.nombre = nombre;
         this.edad = edad;
         this.alias = alias;
         this.letraJugador = letraJugador;
         this.puntaje = 0;
     }
-    
+     public Jugador(String nombre, int edad, String alias) {
+        this.nombre = nombre;
+        this.edad = edad;
+        this.alias = alias;
+    }
     public String getNombre() {
         return nombre;
     }
@@ -48,11 +52,11 @@ public class Jugador {
         this.alias = alias;
     }
 
-    public char getLetraJugador() {
+    public String getLetraJugador() {
         return letraJugador;
     }
 
-    public void setLetraJugador(char letraJugador) {
+    public void setLetraJugador(String letraJugador) {
         this.letraJugador = letraJugador;
     }
 

@@ -5,6 +5,7 @@
  */
 package interfaz;
 
+import dominio.Jugador;
 import dominio.Sistema;
 import java.awt.Toolkit;
 import java.util.ArrayList;
@@ -15,60 +16,74 @@ import java.util.Scanner;
  * @author ivan
  */
 public class Interfaz {
-    private static Sistema system = new Sistema();
+
+    private static Sistema sistema = new Sistema();
     
-    public static void menuPrincipal(){
-        
-        
+    public static void menuPrincipal() {
+
         System.out.println("menu principal");
-        //crear jugador
-        crearJugador();
-    }
-    
-    public static void crearJugador(){
-        System.out.println("Ingresar nombre");
-        String nombre=validarString();
-        System.out.println("Ingresar edad");
-        int edad=validacionNumero(10, 100);
-        System.out.println("Ingresar alias");
-        String alias=validarString();
-        
-        //imprimir datos
-        System.out.println(nombre);
-        System.out.println(edad);
-        System.out.println(alias);
+        menuOpciones();
         
     }
-    
-    public static String validarString(){
-    Scanner scanner= new Scanner(System.in);
-    String dato=scanner.nextLine();
-    return dato;
-    }
-    
-    /* public static int validarNumero(int minimo, int maximo){
-        int numero=0;
-        Boolean datoValido = false;
-        Scanner scanner= new Scanner(System.in);
-        while(!datoValido){
-            try {
-                numero=scanner.nextInt();
-                //if (numero >= minimo && numero <= maximo) {
-                    //return numero;
-                //} else {
-                    //Toolkit.getDefaultToolkit().beep();  
-                //    System.out.print("Error, ingrese un valor entre: " + minimo + " y " + maximo + ": ");
-                //}
-            } 
-            catch (Exception e) {
-                System.out.println("Error, numero mal ingresado");
-                scanner.nextLine();
-                numero=scanner.nextInt();
+
+    public static void menuOpciones() {
+        Scanner scanner = new Scanner(System.in);
+        boolean salir = false;
+        String opcion;
+
+        while (!salir) {
+            System.out.println("A-Registrar jugador");
+            System.out.println("B-Jugar a 'sumas'");
+            System.out.println("C-Dar ranking de jugadores");
+            System.out.println("D-Terminar");
+
+            System.out.println("Elija la opcion");
+            opcion = scanner.nextLine();
+
+            switch (opcion) {
+                case "A":
+                    System.out.println("Registro de jugadores");
+                    System.out.println("");
+                    agregarJugador();
+                    break;
+                case "B":
+                    System.out.println("Jugar");
+                    break;
+                case "C":
+                    System.out.println("Ver ranking de jugadores");
+                    break;
+                case "D":
+                    salir = true;
+                    System.out.println("Juego terminado");
+                    break;
+                default:
+                    System.out.println("ingrese la opcion correcta ");
             }
+
         }
-    return numero;
-    }   */
+
+    }
     
+     public static void agregarJugador() {
+        System.out.println("Ingresar nombre");
+        String nombre = validarString();
+        System.out.println("Ingresar edad");
+        int edad = validacionNumero(10, 100);
+        System.out.println("Ingresar alias");
+        String alias = validarString();
+      
+        Jugador unJugador=new Jugador(nombre, edad, alias,"e",0);
+        sistema.guardarJugador( unJugador);
+        
+    }
+   
+
+    public static String validarString() {
+        Scanner scanner = new Scanner(System.in);
+        String dato = scanner.nextLine();
+        return dato;
+    }
+
     public static int validacionNumero(int min, int max) {
         boolean ok = false;
         while (!ok) {
@@ -78,17 +93,15 @@ public class Interfaz {
                 if (num >= min && num <= max) {
                     return num;
                 } else {
-                    Toolkit.getDefaultToolkit().beep();  
+                    Toolkit.getDefaultToolkit().beep();
                     System.out.print("Error, ingrese un valor entre: " + min + " y " + max + ": ");
                 }
             } catch (Exception e) {
-                Toolkit.getDefaultToolkit().beep();  
+                Toolkit.getDefaultToolkit().beep();
                 System.out.print("Error, tipo de dato incorrecto, volver a ingresar: ");
             }
         }
         return 0;
     }
-    
-    
-    
+
 }
