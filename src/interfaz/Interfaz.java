@@ -38,7 +38,7 @@ public class Interfaz {
             System.out.println("D-Terminar");
 
             System.out.println("Elija la opcion");
-            opcion = scanner.nextLine();
+            opcion = scanner.nextLine().toUpperCase();
 
             switch (opcion) {
                 case "A":
