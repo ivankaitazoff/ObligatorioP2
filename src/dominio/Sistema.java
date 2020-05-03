@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Sistema {
 
-    private ArrayList<Jugador> listaJugadores;
+    private ArrayList<Jugador> listaJugadores=new ArrayList<>();
     private Jugador jugadorActual;
 
     public void guardarJugador(Jugador unJugador) {
