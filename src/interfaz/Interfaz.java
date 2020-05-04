@@ -5,23 +5,20 @@
  */
 package interfaz;
 
-import dominio.Juego;
+import dominio.Tablero;
 import dominio.Jugador;
 import dominio.Sistema;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/**
- *
- * @author ivan
- */
+
 public class Interfaz {
 
     private static Sistema sistema = new Sistema();
-    //private static Juego juego=new Juego();
+    private static Tablero tablero=new Tablero();
     public static void menuPrincipal() {
-        Juego.mostrarTablero();
+        mostrarTablero(tablero.getTablero());
         System.out.println("menu principal");
         menuOpciones();
         
@@ -105,4 +102,27 @@ public class Interfaz {
         return 0;
     }
 
+    public static void mostrarTablero(int[][] tablero ) {
+        int[][] tableroActualizado = tablero;
+        for (int i = 0; i < tableroActualizado.length; i++) {
+            System.out.println("");
+            for (int j = 0; j < tableroActualizado[0].length; j++) {
+                if (tableroActualizado[i][j] < 21) {
+                    System.out.print(letrasVerdes+tableroActualizado[i][j] + ""+resetearColorLetras);
+                }
+                 if (tableroActualizado[i][j] == 21) {
+                    System.out.print(letrasRojas+tableroActualizado[i][j] + ""+resetearColorLetras);
+                }
+                  if (tableroActualizado[i][j] == 22) {
+                    System.out.print(letrasAzules+tableroActualizado[i][j] + ""+resetearColorLetras);
+                }
+               // System.out.print(tableroActualizado[i][j] + "");
+            }
+        }
+        System.out.println("");
+    }
+    public static final String resetearColorLetras = "\u001B[0m";
+    public static final String letrasRojas = "\u001B[31m";
+    public static final String letrasVerdes = "\u001B[32m";
+    public static final String letrasAzules = "\u001B[34m";
 }
