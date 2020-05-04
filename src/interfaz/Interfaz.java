@@ -5,6 +5,7 @@
  */
 package interfaz;
 
+import dominio.Juego;
 import dominio.Jugador;
 import dominio.Sistema;
 import java.awt.Toolkit;
@@ -18,9 +19,9 @@ import java.util.Scanner;
 public class Interfaz {
 
     private static Sistema sistema = new Sistema();
-    
+    //private static Juego juego=new Juego();
     public static void menuPrincipal() {
-
+        Juego.mostrarTablero();
         System.out.println("menu principal");
         menuOpciones();
         
