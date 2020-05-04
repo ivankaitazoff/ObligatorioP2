@@ -106,14 +106,17 @@ public class Interfaz {
         for (int i = 0; i < tableroActualizado.length; i++) {
             System.out.println("");
             for (int j = 0; j < tableroActualizado[0].length; j++) {
-                if (tableroActualizado[i][j] < 21) {
-                    System.out.print(letrasVerdes + tableroActualizado[i][j] + "" + resetearColorLetras);
+                if (tableroActualizado[i][j] < 10) {
+                    System.out.print(letrasVerdes + tableroActualizado[i][j] + "      " + resetearColorLetras);
+                }
+                if (tableroActualizado[i][j] < 21 && tableroActualizado[i][j]>9) {
+                    System.out.print(letrasVerdes + tableroActualizado[i][j] + "     " + resetearColorLetras);
                 }
                 if (tableroActualizado[i][j] == 21) {
-                    System.out.print(letrasRojas + tableroActualizado[i][j] + "" + resetearColorLetras);
+                    System.out.print(letrasRojas + tableroActualizado[i][j] + "      " + resetearColorLetras);
                 }
                 if (tableroActualizado[i][j] == 22) {
-                    System.out.print(letrasAzules + tableroActualizado[i][j] + "" + resetearColorLetras);
+                    System.out.print(letrasAzules + tableroActualizado[i][j] + "      " + resetearColorLetras);
                 }
                 // System.out.print(tableroActualizado[i][j] + "");
             }
