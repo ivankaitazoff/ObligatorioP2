@@ -33,7 +33,9 @@ public class Interfaz {
             System.out.println("B-Jugar a 'sumas'");
             System.out.println("C-Dar ranking de jugadores");
             System.out.println("D-Terminar");
-
+            
+            System.out.println(" ");
+            
             System.out.println("Elija la opcion");
             opcion = scanner.nextLine().toUpperCase();
 
@@ -41,6 +43,7 @@ public class Interfaz {
                 case "A":
                     System.out.println("Registro de jugadores");
                     System.out.println("");
+                    
                     agregarJugador();
                     break;
                 case "B":
@@ -61,6 +64,7 @@ public class Interfaz {
         }
 
     }
+    
 
     public static void agregarJugador() {
         System.out.println("Ingresar nombre");
@@ -69,7 +73,10 @@ public class Interfaz {
         int edad = validacionNumero(10, 100);
         System.out.println("Ingresar alias");
         String alias = validarString();
-
+        while (sistema.aliasRepetidos(alias)){
+            System.out.println("Alias repetido ingresar otro");
+            alias = validarString();
+        }
         Jugador unJugador = new Jugador(nombre, edad, alias, "e", 0);
         sistema.guardarJugador(unJugador);
 
