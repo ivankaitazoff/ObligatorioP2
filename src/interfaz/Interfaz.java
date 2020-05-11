@@ -13,21 +13,21 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Interfaz {
-
+    
     private static Sistema sistema = new Sistema();
     private static Tablero tablero = new Tablero();
-
+    
     public static void menuPrincipal() {
         System.out.println("menu principal");
         menuOpciones();
-
+        
     }
-
+    
     public static void menuOpciones() {
         Scanner scanner = new Scanner(System.in);
         boolean salir = false;
         String opcion;
-
+        
         while (!salir) {
             System.out.println("A-Registrar jugador");
             System.out.println("B-Jugar a 'sumas'");
@@ -38,7 +38,7 @@ public class Interfaz {
             
             System.out.println("Elija la opcion");
             opcion = scanner.nextLine().toUpperCase();
-
+            
             switch (opcion) {
                 case "A":
                     System.out.println("Registro de jugadores");
@@ -48,7 +48,12 @@ public class Interfaz {
                     break;
                 case "B":
                     System.out.println("Jugar");
-                    mostrarTablero(tablero.getTablero());
+                    for (int i = 0; i < sistema.getListaJugadores().size(); i++) {
+                        System.out.println("jugador numero:"+i+sistema.getListaJugadores().get(i));
+                    }
+                    System.out.println("");
+                    
+                   // mostrarTablero(tablero.getTablero());
                     break;
                 case "C":
                     System.out.println("Ver ranking de jugadores");
@@ -60,12 +65,11 @@ public class Interfaz {
                 default:
                     System.out.println("ingrese la opcion correcta ");
             }
-
+            
         }
-
+        
     }
     
-
     public static void agregarJugador() {
         System.out.println("Ingresar nombre");
         String nombre = validarString();
@@ -73,21 +77,21 @@ public class Interfaz {
         int edad = validacionNumero(10, 100);
         System.out.println("Ingresar alias");
         String alias = validarString();
-        while (sistema.aliasRepetidos(alias)){
+        while (sistema.aliasRepetidos(alias)) {
             System.out.println("Alias repetido ingresar otro");
             alias = validarString();
         }
         Jugador unJugador = new Jugador(nombre, edad, alias, "e", 0);
         sistema.guardarJugador(unJugador);
-
+        
     }
-
+    
     public static String validarString() {
         Scanner scanner = new Scanner(System.in);
         String dato = scanner.nextLine();
         return dato;
     }
-
+    
     public static int validacionNumero(int min, int max) {
         boolean ok = false;
         while (!ok) {
@@ -107,7 +111,7 @@ public class Interfaz {
         }
         return 0;
     }
-
+    
     public static void mostrarTablero(int[][] tablero) {
         int[][] tableroActualizado = tablero;
         for (int i = 0; i < tableroActualizado.length; i++) {
@@ -116,7 +120,7 @@ public class Interfaz {
                 if (tableroActualizado[i][j] < 10) {
                     System.out.print(letrasVerdes + tableroActualizado[i][j] + "      " + resetearColorLetras);
                 }
-                if (tableroActualizado[i][j] < 21 && tableroActualizado[i][j]>9) {
+                if (tableroActualizado[i][j] < 21 && tableroActualizado[i][j] > 9) {
                     System.out.print(letrasVerdes + tableroActualizado[i][j] + "     " + resetearColorLetras);
                 }
                 if (tableroActualizado[i][j] == 21) {

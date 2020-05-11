@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Sistema {
 
     private ArrayList<Jugador> listaJugadores=new ArrayList<>();
+   
     private Jugador jugadorActual;
     
     public boolean aliasRepetidos(String alias ){
@@ -24,4 +25,21 @@ public class Sistema {
             System.out.println(listaJugadores.get(i));
         }
     }
+
+    public ArrayList<Jugador> getListaJugadores() {
+        return listaJugadores;
+    }
+
+    public void setListaJugadores(ArrayList<Jugador> listaJugadores) {
+        this.listaJugadores = listaJugadores;
+    }
+
+    public Jugador getJugadorActual() {
+        return jugadorActual;
+    }
+
+    public void setJugadorActual(Jugador jugadorActual) {
+        this.jugadorActual = jugadorActual;
+    }
+    
 }
