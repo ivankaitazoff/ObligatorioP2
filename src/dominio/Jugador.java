@@ -6,15 +6,15 @@ public class Jugador {
     private String nombre;
     private int edad;
     private String alias;
-    private String letraJugador;
-    private int puntaje;
+    private int partidasJugadas;
+    private int partidasGanadas;
 
-    public Jugador(String nombre, int edad, String alias, String letraJugador, int puntaje) {
+    public Jugador(String nombre, int edad, String alias, int puntaje) {
         this.nombre = nombre;
         this.edad = edad;
         this.alias = alias;
-        this.letraJugador = letraJugador;
-        this.puntaje = 0;
+        this.partidasJugadas = 0;
+        this.partidasGanadas = 0;
     }
      public Jugador(String nombre, int edad, String alias) {
         this.nombre = nombre;
@@ -45,25 +45,17 @@ public class Jugador {
         this.alias = alias;
     }
 
-    public String getLetraJugador() {
-        return letraJugador;
-    }
-
-    public void setLetraJugador(String letraJugador) {
-        this.letraJugador = letraJugador;
-    }
-
     public int getPuntaje() {
-        return puntaje;
+        return partidasJugadas;
     }
 
     public void setPuntaje(int puntaje) {
-        this.puntaje = puntaje;
+        this.partidasJugadas = puntaje;
     }
 
     @Override
     public String toString() {
-        return "Jugador{" + "nombre=" + nombre + ", alias=" + alias +'}';
+        return "Jugador{" + "nombre=" + nombre + ", alias=" + alias +", partidas jugadas="+ partidasJugadas + ", partidas ganadas= "+ partidasGanadas+'}';
     }
 
     

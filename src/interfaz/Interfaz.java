@@ -81,7 +81,7 @@ public class Interfaz {
             System.out.println("Alias repetido ingresar otro");
             alias = validarString();
         }
-        Jugador unJugador = new Jugador(nombre, edad, alias, "e", 0);
+        Jugador unJugador = new Jugador(nombre, edad, alias);
         sistema.guardarJugador(unJugador);
         
     }
