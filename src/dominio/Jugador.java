@@ -9,18 +9,14 @@ public class Jugador {
     private int partidasJugadas;
     private int partidasGanadas;
 
-    public Jugador(String nombre, int edad, String alias, int puntaje) {
+    public Jugador(String nombre, int edad, String alias) {
         this.nombre = nombre;
         this.edad = edad;
         this.alias = alias;
         this.partidasJugadas = 0;
         this.partidasGanadas = 0;
     }
-     public Jugador(String nombre, int edad, String alias) {
-        this.nombre = nombre;
-        this.edad = edad;
-        this.alias = alias;
-    }
+    
     public String getNombre() {
         return nombre;
     }

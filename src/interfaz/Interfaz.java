@@ -13,47 +13,75 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Interfaz {
-    
+
     private static Sistema sistema = new Sistema();
     private static Tablero tablero = new Tablero();
-    
+
     public static void menuPrincipal() {
         System.out.println("menu principal");
         menuOpciones();
-        
+
     }
-    
+
     public static void menuOpciones() {
         Scanner scanner = new Scanner(System.in);
         boolean salir = false;
         String opcion;
-        
+
         while (!salir) {
             System.out.println("A-Registrar jugador");
             System.out.println("B-Jugar a 'sumas'");
             System.out.println("C-Dar ranking de jugadores");
             System.out.println("D-Terminar");
-            
+
             System.out.println(" ");
-            
+
             System.out.println("Elija la opcion");
             opcion = scanner.nextLine().toUpperCase();
-            
+
             switch (opcion) {
                 case "A":
                     System.out.println("Registro de jugadores");
                     System.out.println("");
-                    
                     agregarJugador();
                     break;
                 case "B":
-                    System.out.println("Jugar");
-                    for (int i = 0; i < sistema.getListaJugadores().size(); i++) {
-                        System.out.println("jugador numero:"+i+sistema.getListaJugadores().get(i));
+                    if (sistema.getListaJugadores().size() >= 2) {
+                        Tablero tablero = new Tablero();
+                        System.out.println("Ingresar numero de jugador de la siguiente lista");
+                        for (int i = 0; i < sistema.getListaJugadores().size(); i++) {
+                            System.out.println("jugador numero:" + i + "-" + sistema.getListaJugadores().get(i));
+                        }
+
+                        //metodo para elegir el jugador1
+                        int numeroDeJugador1 = validacionNumero(0, sistema.getListaJugadores().size() - 1);
+                        tablero.setJugador1(sistema.getListaJugadores().get(numeroDeJugador1));
+                        System.out.println("Ingrese letra que represente al jugador 1");
+                        String letraJugador1 = validarString();
+                        
+                        //metodo para elegir el jugador2
+                        System.out.println("Ingresar numero de jugador de la siguiente lista");
+                        for (int i = 0; i < sistema.getListaJugadores().size(); i++) {
+                            System.out.println("jugador numero:" + i + "-" + sistema.getListaJugadores().get(i));
+                        }
+                        int numeroDeJugador2 = validacionNumero(0, sistema.getListaJugadores().size() - 1);
+                        while(numeroDeJugador2 == numeroDeJugador1){
+                        numeroDeJugador2 = validacionNumero(0, sistema.getListaJugadores().size() - 1);
+                        }
+                        tablero.setJugador2(sistema.getListaJugadores().get(numeroDeJugador2));
+                        System.out.println("Ingrese letra que represente al jugador 2");
+                        String letraJugador2 = validarString();
+
+                        System.out.println(tablero.getJugador1() + "Letra " + letraJugador1);
+                        System.out.println(tablero.getJugador2() + "Letra " + letraJugador2);
+                        System.out.println("");
+
+                    } else {
+                        System.out.println("Error, no hay suficientes jugadores registrados");
+                        System.out.println("");
                     }
-                    System.out.println("");
-                    
-                   // mostrarTablero(tablero.getTablero());
+
+                    // mostrarTablero(tablero.getTablero());
                     break;
                 case "C":
                     System.out.println("Ver ranking de jugadores");
@@ -65,11 +93,11 @@ public class Interfaz {
                 default:
                     System.out.println("ingrese la opcion correcta ");
             }
-            
+
         }
-        
+
     }
-    
+
     public static void agregarJugador() {
         System.out.println("Ingresar nombre");
         String nombre = validarString();
@@ -83,15 +111,15 @@ public class Interfaz {
         }
         Jugador unJugador = new Jugador(nombre, edad, alias);
         sistema.guardarJugador(unJugador);
-        
+
     }
-    
+
     public static String validarString() {
         Scanner scanner = new Scanner(System.in);
         String dato = scanner.nextLine();
         return dato;
     }
-    
+
     public static int validacionNumero(int min, int max) {
         boolean ok = false;
         while (!ok) {
@@ -111,7 +139,7 @@ public class Interfaz {
         }
         return 0;
     }
-    
+
     public static void mostrarTablero(int[][] tablero) {
         int[][] tableroActualizado = tablero;
         for (int i = 0; i < tableroActualizado.length; i++) {

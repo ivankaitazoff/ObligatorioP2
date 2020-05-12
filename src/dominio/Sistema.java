@@ -5,8 +5,9 @@ import java.util.ArrayList;
 public class Sistema {
 
     private ArrayList<Jugador> listaJugadores=new ArrayList<>();
-    private Jugador jugadorActual;
     
+    
+    //metodo que verifica que el alias no este repetido
     public boolean aliasRepetidos(String alias ){
     boolean repetido=false;    
     for (int i = 0; i < listaJugadores.size(); i++) {
@@ -18,11 +19,13 @@ public class Sistema {
     return repetido;
     }
     
+    //metodo que recibe jugador y lo guarla en la lista de jugadores(listaJugadores)
     public void guardarJugador(Jugador unJugador) {
         listaJugadores.add(unJugador);
         for (int i = 0; i < listaJugadores.size(); i++) {
             System.out.println(listaJugadores.get(i));
         }
+        System.out.println("");
     }
 
     public ArrayList<Jugador> getListaJugadores() {
@@ -32,13 +35,4 @@ public class Sistema {
     public void setListaJugadores(ArrayList<Jugador> listaJugadores) {
         this.listaJugadores = listaJugadores;
     }
-
-    public Jugador getJugadorActual() {
-        return jugadorActual;
-    }
-
-    public void setJugadorActual(Jugador jugadorActual) {
-        this.jugadorActual = jugadorActual;
-    }
-    
 }
