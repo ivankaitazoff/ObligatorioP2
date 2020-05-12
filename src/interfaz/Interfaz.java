@@ -47,35 +47,8 @@ public class Interfaz {
                     break;
                 case "B":
                     if (sistema.getListaJugadores().size() >= 2) {
-                        Tablero tablero = new Tablero();
-                        System.out.println("Ingresar numero de jugador de la siguiente lista");
-                        for (int i = 0; i < sistema.getListaJugadores().size(); i++) {
-                            System.out.println("jugador numero:" + i + "-" + sistema.getListaJugadores().get(i));
-                        }
-
-                        //metodo para elegir el jugador1
-                        int numeroDeJugador1 = validacionNumero(0, sistema.getListaJugadores().size() - 1);
-                        tablero.setJugador1(sistema.getListaJugadores().get(numeroDeJugador1));
-                        System.out.println("Ingrese letra que represente al jugador 1");
-                        String letraJugador1 = validarString();
-                        
-                        //metodo para elegir el jugador2
-                        System.out.println("Ingresar numero de jugador de la siguiente lista");
-                        for (int i = 0; i < sistema.getListaJugadores().size(); i++) {
-                            System.out.println("jugador numero:" + i + "-" + sistema.getListaJugadores().get(i));
-                        }
-                        int numeroDeJugador2 = validacionNumero(0, sistema.getListaJugadores().size() - 1);
-                        while(numeroDeJugador2 == numeroDeJugador1){
-                        numeroDeJugador2 = validacionNumero(0, sistema.getListaJugadores().size() - 1);
-                        }
-                        tablero.setJugador2(sistema.getListaJugadores().get(numeroDeJugador2));
-                        System.out.println("Ingrese letra que represente al jugador 2");
-                        String letraJugador2 = validarString();
-
-                        System.out.println(tablero.getJugador1() + "Letra " + letraJugador1);
-                        System.out.println(tablero.getJugador2() + "Letra " + letraJugador2);
-                        System.out.println("");
-
+                        nuevaPartida();
+                        mostrarTablero(tablero.getTablero());
                     } else {
                         System.out.println("Error, no hay suficientes jugadores registrados");
                         System.out.println("");
@@ -162,6 +135,42 @@ public class Interfaz {
         }
         System.out.println("");
     }
+
+    public static void nuevaPartida() {
+        Tablero tablero = new Tablero();
+        System.out.println("Ingresar numero de jugador de la siguiente lista");
+        for (int i = 0; i < sistema.getListaJugadores().size(); i++) {
+            System.out.println("jugador numero:" + i + "-" + sistema.getListaJugadores().get(i));
+        }
+
+        //metodo para elegir el jugador1
+        int numeroDeJugador1 = validacionNumero(0, sistema.getListaJugadores().size() - 1);
+        tablero.setJugador1(sistema.getListaJugadores().get(numeroDeJugador1));
+        System.out.println("Ingrese letra que represente al jugador 1");
+        String letra1 = validarString();
+        tablero.setLetraJugador1(letra1);
+
+        //metodo para elegir el jugador2
+        System.out.println("Ingresar numero de jugador de la siguiente lista");
+        for (int i = 0; i < sistema.getListaJugadores().size(); i++) {
+            System.out.println("jugador numero:" + i + "-" + sistema.getListaJugadores().get(i));
+        }
+        int numeroDeJugador2 = validacionNumero(0, sistema.getListaJugadores().size() - 1);
+        while (numeroDeJugador2 == numeroDeJugador1) {
+            System.out.println("Ingrese un numero jugador que no este seleccionado");
+            numeroDeJugador2 = validacionNumero(0, sistema.getListaJugadores().size() - 1);
+        }
+        tablero.setJugador2(sistema.getListaJugadores().get(numeroDeJugador2));
+        System.out.println("Ingrese letra que represente al jugador 2");
+        String letra2 = validarString();
+        tablero.setLetraJugador2(letra2);
+
+        System.out.println(tablero.getJugador1() + "Letra " + tablero.getLetraJugador1());
+        System.out.println(tablero.getJugador2() + "Letra " + tablero.getLetraJugador2());
+        System.out.println("");
+        
+    }
+
     public static final String resetearColorLetras = "\u001B[0m";
     public static final String letrasRojas = "\u001B[31m";
     public static final String letrasVerdes = "\u001B[32m";
