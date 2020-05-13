@@ -15,7 +15,6 @@ import java.util.Scanner;
 public class Interfaz {
 
     private static Sistema sistema = new Sistema();
-    private static Tablero tablero = new Tablero();
 
     public static void menuPrincipal() {
         System.out.println("menu principal");
@@ -48,7 +47,6 @@ public class Interfaz {
                 case "B":
                     if (sistema.getListaJugadores().size() >= 2) {
                         nuevaPartida();
-                        mostrarTablero(tablero.getTablero());
                     } else {
                         System.out.println("Error, no hay suficientes jugadores registrados");
                         System.out.println("");
@@ -82,8 +80,8 @@ public class Interfaz {
             System.out.println("Alias repetido ingresar otro");
             alias = validarString();
         }
-        Jugador unJugador = new Jugador(nombre, edad, alias);
-        sistema.guardarJugador(unJugador);
+        //Jugador unJugador = new Jugador(nombre, edad, alias);
+        sistema.guardarJugador(nombre, edad, alias);
 
     }
 
@@ -169,6 +167,8 @@ public class Interfaz {
         System.out.println(tablero.getJugador2() + "Letra " + tablero.getLetraJugador2());
         System.out.println("");
         
+        
+        mostrarTablero(tablero.getTablero());
     }
 
     public static final String resetearColorLetras = "\u001B[0m";
