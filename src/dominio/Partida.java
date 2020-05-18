@@ -1,8 +1,8 @@
 package dominio;
 
-public class Tablero {
+public class Partida {
     private int [] dados = new int[5];
-    private int[][] tablero = {{1, 2, 3, 4, 5}, {6, 7, 8, 9, 10}, {11, 12, 13, 14, 15},
+    private int[][] tableroActual = {{1, 2, 3, 4, 5}, {6, 7, 8, 9, 10}, {11, 12, 13, 14, 15},
     {16, 17, 18, 19, 20}};
     private Jugador jugador1;
     String letraJugador1;
@@ -10,11 +10,19 @@ public class Tablero {
     String letraJugador2;
     
     public int[][] getTablero() {
-        return tablero;
+        return tableroActual;
     }
 
     public void setTablero(int[][] tablero) {
-        this.tablero = tablero;
+        this.tableroActual = tableroActual;
+    }
+    
+    public void setJugadaJug1(int[][] tablero, int fila, int columna) {
+        this.tableroActual[fila][columna] = 21;
+    }
+    
+    public void setJugadaJug2(int[][] tablero, int fila, int columna) {
+        this.tableroActual[fila][columna] = 22;
     }
 
     public int[] getDados() {
