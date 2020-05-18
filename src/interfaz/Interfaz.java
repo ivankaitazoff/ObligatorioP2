@@ -13,10 +13,13 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Interfaz {
-
+    
+    
+    //ponerlo 
     private static Sistema sistema = new Sistema();
 
     public static void menuPrincipal() {
+        //crear sistema aca
         System.out.println("menu principal");
         menuOpciones();
 
