@@ -14,15 +14,11 @@ import java.util.Scanner;
 
 public class Interfaz {
     
-    
-    //ponerlo 
-    private static Sistema sistema = new Sistema();
 
     public static void menuPrincipal() {
-        //crear sistema aca
+        Sistema sistema = new Sistema();
         System.out.println("menu principal");
         menuOpciones();
-
     }
 
     public static void menuOpciones() {
@@ -48,7 +44,7 @@ public class Interfaz {
                     agregarJugador();
                     break;
                 case "B":
-                    if (sistema.getListaJugadores().size() >= 2) {
+                    if (getListaJugadores().size() >= 2) {
                         nuevaPartida();
                     } else {
                         System.out.println("Error, no hay suficientes jugadores registrados");
