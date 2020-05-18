@@ -13,8 +13,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Interfaz {
-    
-        
+
     public static void menuPrincipal() {
         Sistema sistema = new Sistema();
         System.out.println("menu principal");
@@ -77,7 +76,6 @@ public class Interfaz {
             System.out.println("Alias repetido ingresar otro");
             alias = validarString();
         }
-        //Jugador unJugador = new Jugador(nombre, edad, alias);
         sistema.guardarJugador(nombre, edad, alias);
 
     }
@@ -161,20 +159,80 @@ public class Interfaz {
         System.out.println(partida.getJugador1() + "Letra " + partida.getLetraJugador1());
         System.out.println(partida.getJugador2() + "Letra " + partida.getLetraJugador2());
         System.out.println("");
-        
+
         partida.setJugadaJug1(partida.getTablero(), 2, 3);
-        partida.setJugadaJug2(partida.getTablero() , 2, 2);
-        
+        partida.setJugadaJug2(partida.getTablero(), 2, 2);
+
         mostrarTablero(partida);
         //Metodo que setea los dador random y los muestra
         partida.setDadosRandom();
         System.out.print("Dados:  ");
         for (int i = 0; i < partida.getDados().length; i++) {
-            System.out.print(partida.getDados()[i]+ "   ");
+            System.out.print(partida.getDados()[i] + "   ");
         }
         System.out.println("");
     }
 
+    public void setDados(Partida partida) {
+        Scanner scanner = new Scanner(System.in);
+        int[] dados = new int[5];
+        for (int i = 0; i < 5; i++) {
+            int valorDado = validacionNumero(1, 6);
+            dados[i] = valorDado;
+        }
+        partida.setDados(dados);
+    }
+
+    public void menuPartida() {
+        Scanner scanner = new Scanner(System.in);
+        boolean salir = false;
+        String opcion;
+
+        while (!salir) {
+            System.out.println("P-Pasar de turno ");
+            System.out.println("0-Utilizar solamente dado base");
+            System.out.println("C-Uutilizar alguno/s de los extras");
+            System.out.println("X-Abandonar partida");
+            System.out.println("A-Ayuda");
+            int turno = 1;
+            if (turno % 2 == 1) {
+                System.out.println("Turno de jugador 1");
+            } else {
+                System.out.println("Turno de jugador 2");
+
+            }
+
+            System.out.println(" ");
+
+            System.out.println("Elija la opcion");
+            opcion = scanner.nextLine().toUpperCase();
+
+            switch (opcion) {
+                case "P":
+                    turno++;
+                    break;
+                case "0":
+                   
+                    
+                    turno++;
+
+                    break;
+                case "C":
+                   
+                    
+                    turno++;
+
+                    break;
+                case "X":
+
+                    break;
+                case "A":
+
+                    break;
+            }
+        }
+
+    }
     public static final String resetearColorLetras = "\u001B[0m";
     public static final String letrasRojas = "\u001B[31m";
     public static final String letrasVerdes = "\u001B[32m";

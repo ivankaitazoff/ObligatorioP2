@@ -8,7 +8,6 @@ public class Partida {
     private String letraJugador1;
     private Jugador jugador2;
     private String letraJugador2;
-    private int[] posiblesJugadas = new int[10];
     
     public int[][] getTablero() {
         return tablero;
@@ -39,6 +38,7 @@ public class Partida {
             int valorDado = (int) (Math.floor(Math.random()*6)+1);
             dados[i] = valorDado;
         }
+        
         return dados;
     }
     
@@ -75,13 +75,7 @@ public class Partida {
         this.letraJugador2 = letraJugador2;
     }
 
-    public int[] getPosiblesJugadas() {
-        return posiblesJugadas;
-    }
-
-    public void setPosiblesJugadas(int[] posiblesJugadas) {
-        this.posiblesJugadas = posiblesJugadas;
-    }
+ 
 
     
     
