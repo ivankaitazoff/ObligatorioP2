@@ -2,27 +2,28 @@ package dominio;
 
 public class Partida {
     private int [] dados = new int[5];
-    private int[][] tableroActual = {{1, 2, 3, 4, 5}, {6, 7, 8, 9, 10}, {11, 12, 13, 14, 15},
+    private int[][] tablero = {{1, 2, 3, 4, 5}, {6, 7, 8, 9, 10}, {11, 12, 13, 14, 15},
     {16, 17, 18, 19, 20}};
     private Jugador jugador1;
-    String letraJugador1;
+    private String letraJugador1;
     private Jugador jugador2;
-    String letraJugador2;
+    private String letraJugador2;
+    private int[] posiblesJugadas = new int[10];
     
     public int[][] getTablero() {
-        return tableroActual;
+        return tablero;
     }
 
     public void setTablero(int[][] tablero) {
-        this.tableroActual = tableroActual;
+        this.tablero = tablero;
     }
     
     public void setJugadaJug1(int[][] tablero, int fila, int columna) {
-        this.tableroActual[fila][columna] = 21;
+        this.tablero[fila][columna] = 21;
     }
     
     public void setJugadaJug2(int[][] tablero, int fila, int columna) {
-        this.tableroActual[fila][columna] = 22;
+        this.tablero[fila][columna] = 22;
     }
 
     public int[] getDados() {
@@ -40,6 +41,7 @@ public class Partida {
         }
         return dados;
     }
+    
     
     public Jugador getJugador1() {
         return jugador1;
@@ -71,6 +73,14 @@ public class Partida {
 
     public void setLetraJugador2(String letraJugador2) {
         this.letraJugador2 = letraJugador2;
+    }
+
+    public int[] getPosiblesJugadas() {
+        return posiblesJugadas;
+    }
+
+    public void setPosiblesJugadas(int[] posiblesJugadas) {
+        this.posiblesJugadas = posiblesJugadas;
     }
 
     
