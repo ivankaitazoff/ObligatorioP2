@@ -132,9 +132,6 @@ public class Interfaz {
         System.out.println(partida.getJugador2() + "Letra " + partida.getLetraJugador2());
         System.out.println("");
 
-        partida.setJugadaJug1(partida.getTablero(), 2, 3);
-        partida.setJugadaJug2(partida.getTablero(), 2, 2);
-
         System.out.println("En caso de querer utilizar modo test ingresar 'TEST', en caso de no querer");
         String modoTest = sistema.validarString();
         boolean test = false;
@@ -147,18 +144,20 @@ public class Interfaz {
     public static void menuPartida(Sistema sistema, Partida partida, boolean test) {
         Scanner scanner = new Scanner(System.in);
         boolean terminarPartida = false;
+        boolean fichaColocada = true;
         String opcion;
         int turno = 1;
         
         while (!terminarPartida) {
             mostrarTablero(partida);
-            if (test) {
+            if (test == true && fichaColocada == true) {
                 System.out.println("LA PARTIDA SE ENCUENTRA EN MODO TEST"); 
                 partida.setDadosTest(partida, sistema);
             }
-            else{partida.setDadosRandom();
+            else if(test != true && fichaColocada == true){partida.setDadosRandom();
             }
             mostrarDados(partida);
+            fichaColocada = false;
             
             System.out.println("P-Pasar de turno ");
             System.out.println("0-Utilizar solamente dado base");
@@ -178,11 +177,29 @@ public class Interfaz {
 
             switch (opcion) {
                 case "P":
+                    fichaColocada = true;
                     turno++;
                     break;
                 case "0":
-
-                    turno++;
+                    for (int i = 0; i < partida.getTablero().length; i++) {
+                        for (int j = 0; j < partida.getTablero()[0].length; j++) {
+                            if (partida.getDados()[0] == partida.getTablero()[i][j] && turno % 2 == 1) {
+                                partida.setJugadaJug1(partida.getTablero(), i, j);
+                                fichaColocada = true;
+                                break;
+                            }
+                            else if (partida.getDados()[0] == partida.getTablero()[i][j] && turno % 2 == 0) {
+                                partida.setJugadaJug2(partida.getTablero(), i, j);
+                                fichaColocada = true;
+                            }
+                        }
+                    }
+                    if (!fichaColocada) {
+                        System.out.println("Error, no esta libre esa posicion");
+                        System.out.println("Vuelva a ingresar su jugada");
+                    }
+                    else{turno++;
+                    }
                     break;
                 case "C":
 

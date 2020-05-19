@@ -14,10 +14,6 @@ public class Partida {
     public int[][] getTablero() {
         return tablero;
     }
-
-    public void setTablero(int[][] tablero) {
-        this.tablero = tablero;
-    }
     
     public void setJugadaJug1(int[][] tablero, int fila, int columna) {
         this.tablero[fila][columna] = 21;
@@ -31,12 +27,11 @@ public class Partida {
         return dados;
     }
     
-    
-
     //Set dados solo se usa para modo test
     public void setDados(int[] dados) {
         this.dados = dados;
     }
+    
     public void setDadosTest(Partida partida, Sistema sistema) {
         int[] dados = new int[5];
         for (int i = 0; i < 5; i++) {
@@ -51,10 +46,8 @@ public class Partida {
             int valorDado = (int) (Math.floor(Math.random()*6)+1);
             dados[i] = valorDado;
         }
-        
         return dados;
     }
-    
     
     public Jugador getJugador1() {
         return jugador1;
