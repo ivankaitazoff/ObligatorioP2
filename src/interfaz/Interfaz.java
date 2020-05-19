@@ -67,43 +67,17 @@ public class Interfaz {
 
     public static void agregarJugador(Sistema sistema) {
         System.out.println("Ingresar nombre");
-        String nombre = validarString();
+        String nombre = sistema.validarString();
         System.out.println("Ingresar edad");
-        int edad = validacionNumero(10, 100);
+        int edad = sistema.validacionNumero(10, 100);
         System.out.println("Ingresar alias");
-        String alias = validarString();
+        String alias = sistema.validarString();
         while (sistema.aliasRepetidos(alias)) {
             System.out.println("Alias repetido ingresar otro");
-            alias = validarString();
+            alias = sistema.validarString();
         }
         sistema.guardarJugador(nombre, edad, alias);
 
-    }
-
-    public static String validarString() {
-        Scanner scanner = new Scanner(System.in);
-        String dato = scanner.nextLine();
-        return dato;
-    }
-
-    public static int validacionNumero(int min, int max) {
-        boolean ok = false;
-        while (!ok) {
-            String palabra = validarString();
-            try {
-                int num = Integer.parseInt(palabra);
-                if (num >= min && num <= max) {
-                    return num;
-                } else {
-                    Toolkit.getDefaultToolkit().beep();
-                    System.out.print("Error, ingrese un valor entre: " + min + " y " + max + ": ");
-                }
-            } catch (Exception e) {
-                Toolkit.getDefaultToolkit().beep();
-                System.out.print("Error, tipo de dato incorrecto, volver a ingresar: ");
-            }
-        }
-        return 0;
     }
 
     public static void mostrarTablero(Partida partida) {
@@ -135,10 +109,10 @@ public class Interfaz {
         }
 
         //metodo para elegir el jugador1
-        int numeroDeJugador1 = validacionNumero(0, sistema.getListaJugadores().size() - 1);
+        int numeroDeJugador1 = sistema.validacionNumero(0, sistema.getListaJugadores().size() - 1);
         partida.setJugador1(sistema.getListaJugadores().get(numeroDeJugador1));
         System.out.println("Ingrese letra que represente al jugador 1");
-        String letra1 = validarString();
+        String letra1 = sistema.validarString();
         partida.setLetraJugador1(letra1);
 
         //metodo para elegir el jugador2
@@ -146,14 +120,14 @@ public class Interfaz {
         for (int i = 0; i < sistema.getListaJugadores().size(); i++) {
             System.out.println("jugador numero:" + i + "-" + sistema.getListaJugadores().get(i));
         }
-        int numeroDeJugador2 = validacionNumero(0, sistema.getListaJugadores().size() - 1);
+        int numeroDeJugador2 = sistema.validacionNumero(0, sistema.getListaJugadores().size() - 1);
         while (numeroDeJugador2 == numeroDeJugador1) {
             System.out.println("Ingrese un numero jugador que no este seleccionado");
-            numeroDeJugador2 = validacionNumero(0, sistema.getListaJugadores().size() - 1);
+            numeroDeJugador2 = sistema.validacionNumero(0, sistema.getListaJugadores().size() - 1);
         }
         partida.setJugador2(sistema.getListaJugadores().get(numeroDeJugador2));
         System.out.println("Ingrese letra que represente al jugador 2");
-        String letra2 = validarString();
+        String letra2 = sistema.validarString();
         partida.setLetraJugador2(letra2);
 
         System.out.println(partida.getJugador1() + "Letra " + partida.getLetraJugador1());
@@ -173,11 +147,11 @@ public class Interfaz {
         System.out.println("");
     }
 
-    public void setDados(Partida partida) {
+    public void setDados(Partida partida, Sistema sistema) {
         Scanner scanner = new Scanner(System.in);
         int[] dados = new int[5];
         for (int i = 0; i < 5; i++) {
-            int valorDado = validacionNumero(1, 6);
+            int valorDado = sistema.validacionNumero(1, 6);
             dados[i] = valorDado;
         }
         partida.setDados(dados);
@@ -212,14 +186,12 @@ public class Interfaz {
                     turno++;
                     break;
                 case "0":
-                   
-                    
+
                     turno++;
 
                     break;
                 case "C":
-                   
-                    
+
                     turno++;
 
                     break;

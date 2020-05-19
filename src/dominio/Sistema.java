@@ -1,6 +1,8 @@
 package dominio;
 
+import java.awt.Toolkit;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Sistema {
 
@@ -38,5 +40,31 @@ public class Sistema {
 
     public void setListaJugadores(ArrayList<Jugador> listaJugadores) {
         this.listaJugadores = listaJugadores;
+    }
+    
+    public static String validarString() {
+        Scanner scanner = new Scanner(System.in);
+        String dato = scanner.nextLine();
+        return dato;
+    }
+
+    public static int validacionNumero(int min, int max) {
+        boolean ok = false;
+        while (!ok) {
+            String palabra = validarString();
+            try {
+                int num = Integer.parseInt(palabra);
+                if (num >= min && num <= max) {
+                    return num;
+                } else {
+                    Toolkit.getDefaultToolkit().beep();
+                    System.out.print("Error, ingrese un valor entre: " + min + " y " + max + ": ");
+                }
+            } catch (Exception e) {
+                Toolkit.getDefaultToolkit().beep();
+                System.out.print("Error, tipo de dato incorrecto, volver a ingresar: ");
+            }
+        }
+        return 0;
     }
 }
