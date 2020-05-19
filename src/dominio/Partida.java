@@ -1,5 +1,7 @@
 package dominio;
 
+import java.util.Scanner;
+
 public class Partida {
     private int [] dados = new int[5];
     private int[][] tablero = {{1, 2, 3, 4, 5}, {6, 7, 8, 9, 10}, {11, 12, 13, 14, 15},
@@ -28,11 +30,22 @@ public class Partida {
     public int[] getDados() {
         return dados;
     }
+    
+    
 
     //Set dados solo se usa para modo test
     public void setDados(int[] dados) {
         this.dados = dados;
     }
+    public void setDadosTest(Partida partida, Sistema sistema) {
+        int[] dados = new int[5];
+        for (int i = 0; i < 5; i++) {
+            int valorDado = sistema.validacionNumero(1, 6);
+            dados[i] = valorDado;
+        }
+        setDados(dados);
+    }
+    
     public int[] setDadosRandom(){
         for (int i = 0; i < dados.length; i++) {
             int valorDado = (int) (Math.floor(Math.random()*6)+1);

@@ -77,7 +77,6 @@ public class Interfaz {
             alias = sistema.validarString();
         }
         sistema.guardarJugador(nombre, edad, alias);
-
     }
 
     public static void mostrarTablero(Partida partida) {
@@ -107,7 +106,6 @@ public class Interfaz {
         for (int i = 0; i < sistema.getListaJugadores().size(); i++) {
             System.out.println("jugador numero:" + i + "-" + sistema.getListaJugadores().get(i));
         }
-
         //metodo para elegir el jugador1
         int numeroDeJugador1 = sistema.validacionNumero(0, sistema.getListaJugadores().size() - 1);
         partida.setJugador1(sistema.getListaJugadores().get(numeroDeJugador1));
@@ -137,43 +135,40 @@ public class Interfaz {
         partida.setJugadaJug1(partida.getTablero(), 2, 3);
         partida.setJugadaJug2(partida.getTablero(), 2, 2);
 
-        mostrarTablero(partida);
-        //Metodo que setea los dador random y los muestra
-        partida.setDadosRandom();
-        System.out.print("Dados:  ");
-        for (int i = 0; i < partida.getDados().length; i++) {
-            System.out.print(partida.getDados()[i] + "   ");
+        System.out.println("En caso de querer utilizar modo test ingresar 'TEST', en caso de no querer");
+        String modoTest = sistema.validarString();
+        boolean test = false;
+        if (modoTest == "TEST") {
+            test = true;
         }
-        System.out.println("");
+        menuPartida(sistema, partida, test);
     }
 
-    public void setDados(Partida partida, Sistema sistema) {
+    public static void menuPartida(Sistema sistema, Partida partida, boolean test) {
         Scanner scanner = new Scanner(System.in);
-        int[] dados = new int[5];
-        for (int i = 0; i < 5; i++) {
-            int valorDado = sistema.validacionNumero(1, 6);
-            dados[i] = valorDado;
-        }
-        partida.setDados(dados);
-    }
-
-    public void menuPartida() {
-        Scanner scanner = new Scanner(System.in);
-        boolean salir = false;
+        boolean terminarPartida = false;
         String opcion;
-
-        while (!salir) {
+        int turno = 1;
+        
+        while (!terminarPartida) {
+            mostrarTablero(partida);
+            if (test) {
+                System.out.println("LA PARTIDA SE ENCUENTRA EN MODO TEST"); 
+                partida.setDadosTest(partida, sistema);
+            }
+            else{partida.setDadosRandom();
+            }
+            mostrarDados(partida);
+            
             System.out.println("P-Pasar de turno ");
             System.out.println("0-Utilizar solamente dado base");
             System.out.println("C-Uutilizar alguno/s de los extras");
             System.out.println("X-Abandonar partida");
             System.out.println("A-Ayuda");
-            int turno = 1;
             if (turno % 2 == 1) {
                 System.out.println("Turno de jugador 1");
             } else {
                 System.out.println("Turno de jugador 2");
-
             }
 
             System.out.println(" ");
@@ -188,7 +183,6 @@ public class Interfaz {
                 case "0":
 
                     turno++;
-
                     break;
                 case "C":
 
@@ -196,7 +190,7 @@ public class Interfaz {
 
                     break;
                 case "X":
-
+                    terminarPartida = true;
                     break;
                 case "A":
 
@@ -205,6 +199,15 @@ public class Interfaz {
         }
 
     }
+
+    public static void mostrarDados(Partida partida) {
+        System.out.print("Dados:  ");
+        for (int i = 0; i < partida.getDados().length; i++) {
+            System.out.print(partida.getDados()[i] + "   ");
+        }
+        System.out.println("");
+    }
+
     public static final String resetearColorLetras = "\u001B[0m";
     public static final String letrasRojas = "\u001B[31m";
     public static final String letrasVerdes = "\u001B[32m";
