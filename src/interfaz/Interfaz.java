@@ -10,7 +10,7 @@ import dominio.Jugador;
 import dominio.Sistema;
 import java.awt.Toolkit;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class Interfaz {
@@ -53,12 +53,11 @@ public class Interfaz {
                     break;
                 case "C":
                     System.out.println("Ver ranking de jugadores");
-                    ArrayList<Jugador> listaOrdenada = sistema.getListaJugadores();
-                    sort(listaOrdenada);
-                    for (int i = 0; i <sistema.getListaJugadores().size(); i++) {
-                        System.out.println(sistema.getListaJugadores().get(i));
+                    Collections.sort(sistema.getListaJugadores());                    
+                    for (int i = 0; i < sistema.getListaJugadores().size(); i++) {
+                        System.out.println(i+1 +") "+sistema.getListaJugadores().get(i));
                     }
-                    
+
                     break;
                 case "D":
                     salir = true;
@@ -116,9 +115,13 @@ public class Interfaz {
         //metodo para elegir el jugador1
         int numeroDeJugador1 = sistema.validacionNumero(0, sistema.getListaJugadores().size() - 1);
         partida.setJugador1(sistema.getListaJugadores().get(numeroDeJugador1));
+        int partidasJugadasJ1 = partida.getJugador1().getPartidasJugadas();
+        partida.getJugador1().setPartidasJugadas(partidasJugadasJ1 + 1);
+        
         System.out.println("Ingrese una letra que represente al jugador 1");
         String letra1 = sistema.validarString();
-        while(letra1.length()!=1){
+        
+        while (letra1.length() != 1) {
             System.out.println("vuelva a ingresar solo una letra ");
             letra1 = sistema.validarString();
         }
@@ -135,14 +138,18 @@ public class Interfaz {
             numeroDeJugador2 = sistema.validacionNumero(0, sistema.getListaJugadores().size() - 1);
         }
         partida.setJugador2(sistema.getListaJugadores().get(numeroDeJugador2));
+        int partidasJugadasJ2 = partida.getJugador2().getPartidasJugadas();
+        partida.getJugador2().setPartidasJugadas(partidasJugadasJ2 + 1);
+       
         System.out.println("Ingrese una letra que represente al jugador 2");
         String letra2 = sistema.validarString();
-        while(letra2.length()!=1){
+       
+        while (letra2.length() != 1) {
             System.out.println("vuelva a ingresar solo una letra ");
             letra2 = sistema.validarString();
         }
         partida.setLetraJugador2(letra2);
-        
+
         System.out.println(partida.getJugador1() + "Letra " + partida.getLetraJugador1());
         System.out.println(partida.getJugador2() + "Letra " + partida.getLetraJugador2());
         System.out.println("");
@@ -153,7 +160,7 @@ public class Interfaz {
         if (modoTest == "TEST") {
             test = true;
         }
-        
+
         menuPartida(sistema, partida, test);
     }
 
@@ -163,21 +170,21 @@ public class Interfaz {
         boolean fichaColocada = true;
         String opcion;
         int turno = 1;
-        
+
         while (!terminarPartida) {
             mostrarTablero(partida);
             if (test == true && fichaColocada == true) {
-                System.out.println("LA PARTIDA SE ENCUENTRA EN MODO TEST"); 
+                System.out.println("LA PARTIDA SE ENCUENTRA EN MODO TEST");
                 partida.setDadosTest(partida, sistema);
-            }
-            else if(test != true && fichaColocada == true){partida.setDadosRandom();
+            } else if (test != true && fichaColocada == true) {
+                partida.setDadosRandom();
             }
             mostrarDados(partida);
             fichaColocada = false;
-            
+
             System.out.println("P-Pasar de turno ");
             System.out.println("0-Utilizar solamente dado base");
-            System.out.println("C-Uutilizar alguno/s de los extras");
+            System.out.println("C-Utilizar alguno/s de los extras");
             System.out.println("X-Abandonar partida");
             System.out.println("A-Ayuda");
             if (turno % 2 == 1) {
@@ -203,8 +210,7 @@ public class Interfaz {
                                 partida.setJugadaJug1(partida.getTablero(), i, j);
                                 fichaColocada = true;
                                 break;
-                            }
-                            else if (partida.getDados()[0] == partida.getTablero()[i][j] && turno % 2 == 0) {
+                            } else if (partida.getDados()[0] == partida.getTablero()[i][j] && turno % 2 == 0) {
                                 partida.setJugadaJug2(partida.getTablero(), i, j);
                                 fichaColocada = true;
                             }
@@ -213,8 +219,8 @@ public class Interfaz {
                     if (!fichaColocada) {
                         System.out.println("Error, no esta libre esa posicion");
                         System.out.println("Vuelva a ingresar su jugada");
-                    }
-                    else{turno++;
+                    } else {
+                        turno++;
                     }
                     break;
                 case "C":
@@ -223,9 +229,13 @@ public class Interfaz {
 
                     break;
                 case "X":
-                    if (turno % 2 ==1) {
-                        partida.getJugador1().s;
-                        
+                    if (turno % 2 == 1) {
+                       int partidasGanadasJ2=partida.getJugador2().getPartidasGanadas();
+                        partida.getJugador2().setPartidasGanadas(partidasGanadasJ2+1);
+
+                    }else{
+                    int partidasGanadasJ1=partida.getJugador1().getPartidasGanadas();
+                        partida.getJugador1().setPartidasGanadas(partidasGanadasJ1+1);
                     }
                     terminarPartida = true;
                     break;

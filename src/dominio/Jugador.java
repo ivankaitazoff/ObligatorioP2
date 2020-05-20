@@ -63,6 +63,7 @@ public class Jugador implements Comparable<Jugador>{
 
     @Override
     public int compareTo(Jugador jugador) {
-        return Integer.compare(partidasGanadas, jugador.partidasGanadas);
+    return  jugador.getPartidasGanadas() - this.getPartidasGanadas();
+        
     }
 }
