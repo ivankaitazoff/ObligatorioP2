@@ -109,8 +109,12 @@ public class Interfaz {
         //metodo para elegir el jugador1
         int numeroDeJugador1 = sistema.validacionNumero(0, sistema.getListaJugadores().size() - 1);
         partida.setJugador1(sistema.getListaJugadores().get(numeroDeJugador1));
-        System.out.println("Ingrese letra que represente al jugador 1");
+        System.out.println("Ingrese una letra que represente al jugador 1");
         String letra1 = sistema.validarString();
+        while(letra1.length()!=1){
+            System.out.println("vuelva a ingresar solo una letra ");
+            letra1 = sistema.validarString();
+        }
         partida.setLetraJugador1(letra1);
 
         //metodo para elegir el jugador2
@@ -124,10 +128,14 @@ public class Interfaz {
             numeroDeJugador2 = sistema.validacionNumero(0, sistema.getListaJugadores().size() - 1);
         }
         partida.setJugador2(sistema.getListaJugadores().get(numeroDeJugador2));
-        System.out.println("Ingrese letra que represente al jugador 2");
+        System.out.println("Ingrese una letra que represente al jugador 2");
         String letra2 = sistema.validarString();
+        while(letra2.length()!=1){
+            System.out.println("vuelva a ingresar solo una letra ");
+            letra2 = sistema.validarString();
+        }
         partida.setLetraJugador2(letra2);
-
+        
         System.out.println(partida.getJugador1() + "Letra " + partida.getLetraJugador1());
         System.out.println(partida.getJugador2() + "Letra " + partida.getLetraJugador2());
         System.out.println("");
