@@ -10,6 +10,7 @@ import dominio.Jugador;
 import dominio.Sistema;
 import java.awt.Toolkit;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Scanner;
 
 public class Interfaz {
@@ -52,9 +53,10 @@ public class Interfaz {
                     break;
                 case "C":
                     System.out.println("Ver ranking de jugadores");
+                    ArrayList<Jugador> listaOrdenada = sistema.getListaJugadores();
+                    sort(listaOrdenada);
                     for (int i = 0; i <sistema.getListaJugadores().size(); i++) {
                         System.out.println(sistema.getListaJugadores().get(i));
-                        
                     }
                     
                     break;
@@ -151,6 +153,7 @@ public class Interfaz {
         if (modoTest == "TEST") {
             test = true;
         }
+        
         menuPartida(sistema, partida, test);
     }
 

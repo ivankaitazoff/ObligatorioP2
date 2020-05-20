@@ -1,8 +1,7 @@
-
 package dominio;
 
+public class Jugador implements Comparable<Jugador>{
 
-public class Jugador {
     private String nombre;
     private int edad;
     private String alias;
@@ -16,7 +15,7 @@ public class Jugador {
         this.partidasJugadas = 0;
         this.partidasGanadas = 0;
     }
-    
+
     public String getNombre() {
         return nombre;
     }
@@ -41,19 +40,29 @@ public class Jugador {
         this.alias = alias;
     }
 
-    public int getPuntaje() {
+    public int getPartidasJugadas() {
         return partidasJugadas;
     }
 
-    public void setPuntaje(int puntaje) {
-        this.partidasJugadas = puntaje;
+    public void setPartidasJugadas(int partidasJugadas) {
+        this.partidasJugadas = partidasJugadas;
+    }
+
+    public int getPartidasGanadas() {
+        return partidasGanadas;
+    }
+
+    public void setPartidasGanadas(int partidasGanadas) {
+        this.partidasGanadas = partidasGanadas;
     }
 
     @Override
     public String toString() {
-        return "Jugador{" + "nombre=" + nombre + ", alias=" + alias +", partidas jugadas="+ partidasJugadas + ", partidas ganadas= "+ partidasGanadas+'}';
+        return "Jugador{" + "nombre=" + nombre + ", alias=" + alias + ", partidas jugadas=" + partidasJugadas + ", partidas ganadas= " + partidasGanadas + '}';
     }
-    
-    
-    
+
+    @Override
+    public int compareTo(Jugador jugador) {
+        return Integer.compare(partidasGanadas, jugador.partidasGanadas);
+    }
 }
