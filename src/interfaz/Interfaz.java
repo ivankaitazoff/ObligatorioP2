@@ -52,6 +52,11 @@ public class Interfaz {
                     break;
                 case "C":
                     System.out.println("Ver ranking de jugadores");
+                    for (int i = 0; i <sistema.getListaJugadores().size(); i++) {
+                        System.out.println(sistema.getListaJugadores().get(i));
+                        
+                    }
+                    
                     break;
                 case "D":
                     salir = true;
@@ -215,6 +220,10 @@ public class Interfaz {
 
                     break;
                 case "X":
+                    if (turno % 2 ==1) {
+                        partida.getJugador1().s;
+                        
+                    }
                     terminarPartida = true;
                     break;
                 case "A":

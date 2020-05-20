@@ -53,7 +53,7 @@ public class Jugador {
     public String toString() {
         return "Jugador{" + "nombre=" + nombre + ", alias=" + alias +", partidas jugadas="+ partidasJugadas + ", partidas ganadas= "+ partidasGanadas+'}';
     }
-
+    
     
     
 }
