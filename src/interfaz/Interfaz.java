@@ -29,7 +29,7 @@ public class Interfaz {
         while (!salir) {
             System.out.println("A-Registrar jugador");
             System.out.println("B-Jugar a 'sumas'");
-            System.out.println("C-Dar ranking de jugadores");
+            System.out.println("C-Ver ranking de jugadores");
             System.out.println("D-Terminar");
 
             System.out.println(" ");
@@ -52,12 +52,13 @@ public class Interfaz {
                     }
                     break;
                 case "C":
-                    System.out.println("Ver ranking de jugadores");
-                    Collections.sort(sistema.getListaJugadores());                    
+                    System.out.println("");
+                    System.out.println("Ranking de jugadores");
+                    Collections.sort(sistema.getListaJugadores());
                     for (int i = 0; i < sistema.getListaJugadores().size(); i++) {
-                        System.out.println(i+1 +") "+sistema.getListaJugadores().get(i));
+                        System.out.println(i + 1 + ") " + sistema.getListaJugadores().get(i));
                     }
-
+                    System.out.println("");
                     break;
                 case "D":
                     salir = true;
@@ -117,10 +118,10 @@ public class Interfaz {
         partida.setJugador1(sistema.getListaJugadores().get(numeroDeJugador1));
         int partidasJugadasJ1 = partida.getJugador1().getPartidasJugadas();
         partida.getJugador1().setPartidasJugadas(partidasJugadasJ1 + 1);
-        
+
         System.out.println("Ingrese una letra que represente al jugador 1");
         String letra1 = sistema.validarString();
-        
+
         while (letra1.length() != 1) {
             System.out.println("vuelva a ingresar solo una letra ");
             letra1 = sistema.validarString();
@@ -140,10 +141,10 @@ public class Interfaz {
         partida.setJugador2(sistema.getListaJugadores().get(numeroDeJugador2));
         int partidasJugadasJ2 = partida.getJugador2().getPartidasJugadas();
         partida.getJugador2().setPartidasJugadas(partidasJugadasJ2 + 1);
-       
+
         System.out.println("Ingrese una letra que represente al jugador 2");
         String letra2 = sistema.validarString();
-       
+
         while (letra2.length() != 1) {
             System.out.println("vuelva a ingresar solo una letra ");
             letra2 = sistema.validarString();
@@ -165,7 +166,6 @@ public class Interfaz {
     }
 
     public static void menuPartida(Sistema sistema, Partida partida, boolean test) {
-        Scanner scanner = new Scanner(System.in);
         boolean terminarPartida = false;
         boolean fichaColocada = true;
         String opcion;
@@ -196,7 +196,7 @@ public class Interfaz {
             System.out.println(" ");
 
             System.out.println("Elija la opcion");
-            opcion = scanner.nextLine().toUpperCase();
+            opcion = sistema.validarString().toUpperCase();
 
             switch (opcion) {
                 case "P":
@@ -224,18 +224,34 @@ public class Interfaz {
                     }
                     break;
                 case "C":
+                    try {
+                    System.out.println("Ingrese dados extra que se quieran utilizar");
+                    String dados = sistema.validarString();
+                    String[] arrayStringDados = dados.split(" ");
+                    int[] arrayIntDados = new int[arrayStringDados.length];
+                    int sumaDados = partida.getDados()[0];
+                    for (int i = 0; i < arrayIntDados.length; i++) {
+                        arrayIntDados[i] = Integer.parseInt(arrayStringDados[i]);
+                        if (arrayIntDados[i] < 1 || arrayIntDados[i] > 6) {
+                            System.out.println("Error, los valores ingresados deben ser entre 1 y 6(incluidos)");
+                            arrayIntDados[i] = sistema.validacionNumero(1, 6);
+                        }
+                    }
+                } catch (Exception e) {
+                        System.out.println("Error");
+                }
 
-                    turno++;
+                turno++;
 
-                    break;
+                break;
                 case "X":
                     if (turno % 2 == 1) {
-                       int partidasGanadasJ2=partida.getJugador2().getPartidasGanadas();
-                        partida.getJugador2().setPartidasGanadas(partidasGanadasJ2+1);
+                        int partidasGanadasJ2 = partida.getJugador2().getPartidasGanadas();
+                        partida.getJugador2().setPartidasGanadas(partidasGanadasJ2 + 1);
 
-                    }else{
-                    int partidasGanadasJ1=partida.getJugador1().getPartidasGanadas();
-                        partida.getJugador1().setPartidasGanadas(partidasGanadasJ1+1);
+                    } else {
+                        int partidasGanadasJ1 = partida.getJugador1().getPartidasGanadas();
+                        partida.getJugador1().setPartidasGanadas(partidasGanadasJ1 + 1);
                     }
                     terminarPartida = true;
                     break;
