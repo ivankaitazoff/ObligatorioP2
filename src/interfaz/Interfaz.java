@@ -232,6 +232,8 @@ public class Interfaz {
                     int sumaDados = partida.getDados()[0];
                     for (int i = 0; i < arrayIntDados.length; i++) {
                         arrayIntDados[i] = Integer.parseInt(arrayStringDados[i]);
+                        //Corroborar que los valores ingresados correspondan con los dados extra
+                        
                         if (arrayIntDados[i] < 1 || arrayIntDados[i] > 6) {
                             System.out.println("Error, los valores ingresados deben ser entre 1 y 6(incluidos)");
                             arrayIntDados[i] = sistema.validacionNumero(1, 6);
