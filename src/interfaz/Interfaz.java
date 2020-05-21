@@ -228,24 +228,52 @@ public class Interfaz {
                     System.out.println("Ingrese dados extra que se quieran utilizar");
                     String dados = sistema.validarString();
                     String[] arrayStringDados = dados.split(" ");
+                    boolean dadoExiste = false;
+                    int[] dadosSinUsar = partida.getDados();
                     int[] arrayIntDados = new int[arrayStringDados.length];
                     int sumaDados = partida.getDados()[0];
                     for (int i = 0; i < arrayIntDados.length; i++) {
+                        dadoExiste = false;
                         arrayIntDados[i] = Integer.parseInt(arrayStringDados[i]);
-                        //Corroborar que los valores ingresados correspondan con los dados extra
-                        
-                        if (arrayIntDados[i] < 1 || arrayIntDados[i] > 6) {
+                        while (arrayIntDados[i] < 1 || arrayIntDados[i] > 6) {
                             System.out.println("Error, los valores ingresados deben ser entre 1 y 6(incluidos)");
                             arrayIntDados[i] = sistema.validacionNumero(1, 6);
                         }
+                        for (int j = 0; j < dadosSinUsar.length; j++) {
+                            if (arrayIntDados[i] == dadosSinUsar[j]) {
+                                dadosSinUsar[j] = 0;
+                                dadoExiste = true;
+                                sumaDados = sumaDados + arrayIntDados[i];
+                                break;
+                            }
+                        }
+                        if (!dadoExiste) {
+                            System.out.println("Error, dados ingresados no corresponden con posibles opciones");
+                            break;
+                        }
                     }
+                    
+                    if (dadoExiste && sumaDados <= 20) {
+                    for (int i = 0; i < partida.getTablero().length; i++) {
+                        for (int j = 0; j < partida.getTablero()[0].length; j++) {
+                            if (sumaDados == partida.getTablero()[i][j] && turno % 2 == 1) {
+                                partida.setJugadaJug1(partida.getTablero(), i, j);
+                                fichaColocada = true;
+                                break;
+                            } else if (sumaDados == partida.getTablero()[i][j] && turno % 2 == 0) {
+                                partida.setJugadaJug2(partida.getTablero(), i, j);
+                                fichaColocada = true;
+                            }
+                        }
+                    }
+                        turno++;
+                    }
+
                 } catch (Exception e) {
-                        System.out.println("Error");
+                    System.out.println("Error");
                 }
-
-                turno++;
-
                 break;
+
                 case "X":
                     if (turno % 2 == 1) {
                         int partidasGanadasJ2 = partida.getJugador2().getPartidasGanadas();
