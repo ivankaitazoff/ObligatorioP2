@@ -225,54 +225,57 @@ public class Interfaz {
                     break;
                 case "C":
                     try {
-                    System.out.println("Ingrese dados extra que se quieran utilizar");
-                    String dados = sistema.validarString();
-                    String[] arrayStringDados = dados.split(" ");
-                    boolean dadoExiste = false;
-                    int[] dadosSinUsar = partida.getDados();
-                    int[] arrayIntDados = new int[arrayStringDados.length];
-                    int sumaDados = partida.getDados()[0];
-                    for (int i = 0; i < arrayIntDados.length; i++) {
-                        dadoExiste = false;
-                        arrayIntDados[i] = Integer.parseInt(arrayStringDados[i]);
-                        while (arrayIntDados[i] < 1 || arrayIntDados[i] > 6) {
-                            System.out.println("Error, los valores ingresados deben ser entre 1 y 6(incluidos)");
-                            arrayIntDados[i] = sistema.validacionNumero(1, 6);
+                        System.out.println("Ingrese dados extra que se quieran utilizar");
+                        String dados = sistema.validarString();
+                        String[] arrayStringDados = dados.split(" ");
+                        boolean dadoExiste = false;
+                        int[] dadosSinUsar = new int[5];
+                        for (int i = 0; i < partida.getDados().length; i++) {
+                            dadosSinUsar[i] = partida.getDados()[i];
                         }
-                        for (int j = 0; j < dadosSinUsar.length; j++) {
-                            if (arrayIntDados[i] == dadosSinUsar[j]) {
-                                dadosSinUsar[j] = 0;
-                                dadoExiste = true;
-                                sumaDados = sumaDados + arrayIntDados[i];
+                        int[] arrayIntDados = new int[arrayStringDados.length];
+                        int sumaDados = partida.getDados()[0];
+                        for (int i = 0; i < arrayIntDados.length; i++) {
+                            dadoExiste = false;
+                            arrayIntDados[i] = Integer.parseInt(arrayStringDados[i]);
+                            while (arrayIntDados[i] < 1 || arrayIntDados[i] > 6) {
+                                System.out.println("Error, los valores ingresados deben ser entre 1 y 6(incluidos)");
+                                arrayIntDados[i] = sistema.validacionNumero(1, 6);
+                            }
+                            for (int j = 0; j < dadosSinUsar.length; j++) {
+                                if (arrayIntDados[i] == dadosSinUsar[j]) {
+                                    dadosSinUsar[j] = 0;
+                                    dadoExiste = true;
+                                    sumaDados = sumaDados + arrayIntDados[i];
+                                    break;
+                                }
+                            }
+                            if (!dadoExiste) {
+                                System.out.println("Error, dados ingresados no corresponden con posibles opciones");
                                 break;
                             }
                         }
-                        if (!dadoExiste) {
-                            System.out.println("Error, dados ingresados no corresponden con posibles opciones");
-                            break;
-                        }
-                    }
-                    
-                    if (dadoExiste && sumaDados <= 20) {
-                    for (int i = 0; i < partida.getTablero().length; i++) {
-                        for (int j = 0; j < partida.getTablero()[0].length; j++) {
-                            if (sumaDados == partida.getTablero()[i][j] && turno % 2 == 1) {
-                                partida.setJugadaJug1(partida.getTablero(), i, j);
-                                fichaColocada = true;
-                                break;
-                            } else if (sumaDados == partida.getTablero()[i][j] && turno % 2 == 0) {
-                                partida.setJugadaJug2(partida.getTablero(), i, j);
-                                fichaColocada = true;
-                            }
-                        }
-                    }
-                        turno++;
-                    }
 
-                } catch (Exception e) {
-                    System.out.println("Error");
-                }
-                break;
+                        if (dadoExiste && sumaDados <= 20) {
+                            for (int i = 0; i < partida.getTablero().length; i++) {
+                                for (int j = 0; j < partida.getTablero()[0].length; j++) {
+                                    if (sumaDados == partida.getTablero()[i][j] && turno % 2 == 1) {
+                                        partida.setJugadaJug1(partida.getTablero(), i, j);
+                                        fichaColocada = true;
+                                        break;
+                                    } else if (sumaDados == partida.getTablero()[i][j] && turno % 2 == 0) {
+                                        partida.setJugadaJug2(partida.getTablero(), i, j);
+                                        fichaColocada = true;
+                                    }
+                                }
+                            }
+                            turno++;
+                        }
+
+                    } catch (Exception e) {
+                        System.out.println("Error");
+                    }
+                    break;
 
                 case "X":
                     if (turno % 2 == 1) {
@@ -286,11 +289,11 @@ public class Interfaz {
                     terminarPartida = true;
                     break;
                 case "A":
-
+                    String ayuda = partida.pedidoAyuda(partida);
+                    System.out.println(ayuda);
                     break;
             }
         }
-
     }
 
     public static void mostrarDados(Partida partida) {
