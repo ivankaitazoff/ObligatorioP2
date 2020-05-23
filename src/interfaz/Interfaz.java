@@ -1,8 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+//Nombres y numeros de estudiantes
+//Ivan kaitazoff: 233940
+//Sebastian Romelli: 222405
 package interfaz;
 
 import dominio.Partida;
@@ -171,19 +169,19 @@ public class Interfaz {
         boolean fichaColocada = true;
         String opcion;
         int turno = 1;
-        int puntosJug1=0;
-        int puntosJug2=0;
+        int puntosJug1 = 0;
+        int puntosJug2 = 0;
         while (!terminarPartida) {
             mostrarTablero(partida);
-            
+
             if (test == true && fichaColocada == true) {
                 System.out.println("LA PARTIDA SE ENCUENTRA EN MODO TEST, INGRESAR DADOS DE A UNO");
-                partida.setDadosTest(partida, sistema);
+                partida.setDadosTest(sistema);
             } else if (test != true && fichaColocada == true) {
                 partida.setDadosRandom();
             }
-            puntosJug1 = partida.puntosJugadorUno(partida, 21);
-            puntosJug2 = partida.puntosJugadorUno(partida, 22);
+            puntosJug1 = partida.contadorPuntos(21);
+            puntosJug2 = partida.contadorPuntos(22);
             System.out.println("Puntos del jugador 1: " + puntosJug1);
             System.out.println("Puntos del jugador 2: " + puntosJug2);
             mostrarDados(partida);
@@ -232,57 +230,57 @@ public class Interfaz {
                     break;
                 case "C":
                     try {
-                        System.out.println("Ingrese dados extra que se quieran utilizar");
-                        String dados = sistema.validarString();
-                        String[] arrayStringDados = dados.split(" ");
-                        boolean dadoExiste = false;
-                        int[] dadosSinUsar = new int[5];
-                        for (int i = 0; i < partida.getDados().length; i++) {
-                            dadosSinUsar[i] = partida.getDados()[i];
+                    System.out.println("Ingrese dados extra que se quieran utilizar");
+                    String dados = sistema.validarString();
+                    String[] arrayStringDados = dados.split(" ");
+                    boolean dadoExiste = false;
+                    int[] dadosSinUsar = new int[5];
+                    for (int i = 0; i < partida.getDados().length; i++) {
+                        dadosSinUsar[i] = partida.getDados()[i];
+                    }
+                    int[] arrayIntDados = new int[arrayStringDados.length];
+                    int sumaDados = partida.getDados()[0];
+                    for (int i = 0; i < arrayIntDados.length; i++) {
+                        dadoExiste = false;
+                        arrayIntDados[i] = Integer.parseInt(arrayStringDados[i]);
+                        while (arrayIntDados[i] < 1 || arrayIntDados[i] > 6) {
+                            System.out.println("Error, los valores ingresados deben ser entre 1 y 6(incluidos)");
+                            arrayIntDados[i] = sistema.validacionNumero(1, 6);
                         }
-                        int[] arrayIntDados = new int[arrayStringDados.length];
-                        int sumaDados = partida.getDados()[0];
-                        for (int i = 0; i < arrayIntDados.length; i++) {
-                            dadoExiste = false;
-                            arrayIntDados[i] = Integer.parseInt(arrayStringDados[i]);
-                            while (arrayIntDados[i] < 1 || arrayIntDados[i] > 6) {
-                                System.out.println("Error, los valores ingresados deben ser entre 1 y 6(incluidos)");
-                                arrayIntDados[i] = sistema.validacionNumero(1, 6);
-                            }
-                            for (int j = 1; j < dadosSinUsar.length; j++) {
-                                if (arrayIntDados[i] == dadosSinUsar[j]) {
-                                    dadosSinUsar[j] = 0;
-                                    dadoExiste = true;
-                                    sumaDados = sumaDados + arrayIntDados[i];
-                                    break;
-                                }
-                            }
-                            if (!dadoExiste) {
-                                System.out.println("Error, dados ingresados no corresponden con posibles opciones");
+                        for (int j = 1; j < dadosSinUsar.length; j++) {
+                            if (arrayIntDados[i] == dadosSinUsar[j]) {
+                                dadosSinUsar[j] = 0;
+                                dadoExiste = true;
+                                sumaDados = sumaDados + arrayIntDados[i];
                                 break;
                             }
                         }
+                        if (!dadoExiste) {
+                            System.out.println("Error, dados ingresados no corresponden con posibles opciones");
+                            break;
+                        }
+                    }
 
-                        if (dadoExiste && sumaDados <= 20) {
-                            for (int i = 0; i < partida.getTablero().length; i++) {
-                                for (int j = 0; j < partida.getTablero()[0].length; j++) {
-                                    if (sumaDados == partida.getTablero()[i][j] && turno % 2 == 1) {
-                                        partida.setJugadaJug1(partida.getTablero(), i, j);
-                                        fichaColocada = true;
-                                        break;
-                                    } else if (sumaDados == partida.getTablero()[i][j] && turno % 2 == 0) {
-                                        partida.setJugadaJug2(partida.getTablero(), i, j);
-                                        fichaColocada = true;
-                                    }
+                    if (dadoExiste && sumaDados <= 20) {
+                        for (int i = 0; i < partida.getTablero().length; i++) {
+                            for (int j = 0; j < partida.getTablero()[0].length; j++) {
+                                if (sumaDados == partida.getTablero()[i][j] && turno % 2 == 1) {
+                                    partida.setJugadaJug1(partida.getTablero(), i, j);
+                                    fichaColocada = true;
+                                    break;
+                                } else if (sumaDados == partida.getTablero()[i][j] && turno % 2 == 0) {
+                                    partida.setJugadaJug2(partida.getTablero(), i, j);
+                                    fichaColocada = true;
                                 }
                             }
-                            turno++;
                         }
-
-                    } catch (Exception e) {
-                        System.out.println("Error");
+                        turno++;
                     }
-                    break;
+
+                } catch (Exception e) {
+                    System.out.println("Error");
+                }
+                break;
 
                 case "X":
                     if (turno % 2 == 1) {
@@ -302,21 +300,24 @@ public class Interfaz {
                     break;
             }
             if (!terminarPartida) {
-                terminarPartida=partida.tableroLleno(partida);
-                }           
+                terminarPartida = partida.tableroLleno(partida);
+            }
         }
         if (partidaAbandonada == false && terminarPartida) {
-                    if (puntosJug1 > puntosJug2) {
-                        int partidasGanadasJ1 = partida.getJugador1().getPartidasGanadas();
-                        partida.getJugador1().setPartidasGanadas(partidasGanadasJ1 + 1);
-                        System.out.println("Juego terminado, ganador jugador 1 con: "+puntosJug1+" puntos");
-                    }
-                    else if(puntosJug2 > puntosJug1){
-                        int partidasGanadasJ2 = partida.getJugador2().getPartidasGanadas();
-                        partida.getJugador2().setPartidasGanadas(partidasGanadasJ2 + 1);
-                        System.out.println("Juego terminado, ganador jugador 2 con: "+puntosJug2+" puntos");
-                    }
-                }
+            puntosJug1 = partida.contadorPuntos(21);
+            puntosJug2 = partida.contadorPuntos(22);
+            if (puntosJug1 > puntosJug2) {
+                int partidasGanadasJ1 = partida.getJugador1().getPartidasGanadas();
+                partida.getJugador1().setPartidasGanadas(partidasGanadasJ1 + 1);
+                System.out.println("Juego terminado, ganador jugador 1 con: " + puntosJug1 + " puntos");
+            } else if (puntosJug2 > puntosJug1) {
+                int partidasGanadasJ2 = partida.getJugador2().getPartidasGanadas();
+                partida.getJugador2().setPartidasGanadas(partidasGanadasJ2 + 1);
+                System.out.println("Juego terminado, ganador jugador 2 con: " + puntosJug2 + " puntos");
+            } else {
+                System.out.println("Empate, no hay ganador");
+            }
+        }
         System.out.println("");
     }
 

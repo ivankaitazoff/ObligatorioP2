@@ -1,3 +1,6 @@
+//Nombres y numeros de estudiantes
+//Ivan kaitazoff: 233940
+//Sebastian Romelli: 222405
 package dominio;
 
 import java.awt.Toolkit;
@@ -41,7 +44,7 @@ public class Sistema {
     public void setListaJugadores(ArrayList<Jugador> listaJugadores) {
         this.listaJugadores = listaJugadores;
     }
-    
+
     public static String validarString() {
         Scanner scanner = new Scanner(System.in);
         String dato = scanner.nextLine();
@@ -67,6 +70,5 @@ public class Sistema {
         }
         return 0;
     }
-    
-    
+
 }

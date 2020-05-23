@@ -1,3 +1,6 @@
+//Nombres y numeros de estudiantes
+//Ivan kaitazoff: 233940
+//Sebastian Romelli: 222405
 package dominio;
 
 import java.util.Scanner;
@@ -33,7 +36,7 @@ public class Partida {
         this.dados = dados;
     }
 
-    public void setDadosTest(Partida partida, Sistema sistema) {
+    public void setDadosTest(Sistema sistema) {
         int[] dados = new int[5];
         for (int i = 0; i < 5; i++) {
             int valorDado = sistema.validacionNumero(1, 6);
@@ -82,13 +85,13 @@ public class Partida {
         this.letraJugador2 = letraJugador2;
     }
 
-    public boolean posicionLibreMetodo(Partida partida, boolean posicionLibre, int posibleSolucion) {
-        for (int j = 0; j < partida.getTablero().length; j++) {
+    public boolean posicionLibreMetodo(boolean posicionLibre, int posibleSolucion) {
+        for (int j = 0; j < getTablero().length; j++) {
             if (posicionLibre) {
                 break;
             }
-            for (int k = 0; k < partida.getTablero()[0].length; k++) {
-                if (partida.getTablero()[j][k] == posibleSolucion) {
+            for (int k = 0; k < getTablero()[0].length; k++) {
+                if (getTablero()[j][k] == posibleSolucion) {
                     posicionLibre = true;
 
                     break;
@@ -103,58 +106,58 @@ public class Partida {
         int posibleSolucion = 0;
         boolean posicionLibre = false;
         //calculo para usar 1 dado extra
-        for (int i = 1; i < partida.getDados().length; i++) {
+        for (int i = 1; i < getDados().length; i++) {
             if (posicionLibre) {
                 break;
             }
-            posibleSolucion = partida.getDados()[0] + partida.getDados()[i];
-            posicionLibre = partida.posicionLibreMetodo(partida, posicionLibre, posibleSolucion);
+            posibleSolucion = getDados()[0] + getDados()[i];
+            posicionLibre = posicionLibreMetodo(posicionLibre, posibleSolucion);
             if (posicionLibre) {
                 texto = "Posible solucion es utilizar posicion: "
                         + posibleSolucion + ",ingresando: "
-                        + partida.getDados()[i];
+                        + getDados()[i];
             }
         }
         //calculo para el caso de usar 2 dados extra
         if (posicionLibre == false) {
-            for (int i = 1; i < partida.getDados().length; i++) {
+            for (int i = 1; i < getDados().length; i++) {
                 if (posicionLibre) {
                     break;
                 }
-                for (int j = 1; j < partida.getDados().length; j++) {
+                for (int j = 1; j < getDados().length; j++) {
                     if (i != j) {
-                        posibleSolucion = partida.getDados()[0] + partida.getDados()[i] + partida.getDados()[j];
+                        posibleSolucion = getDados()[0] + getDados()[i] + getDados()[j];
                     }
-                    posicionLibre = partida.posicionLibreMetodo(partida, posicionLibre, posibleSolucion);
+                    posicionLibre = posicionLibreMetodo(posicionLibre, posibleSolucion);
                     if (posicionLibre) {
                         texto = "Posible solucion es utilizar posicion: "
                                 + posibleSolucion + ",ingresando: "
-                                + partida.getDados()[i] + " " + partida.getDados()[j];
+                                + getDados()[i] + " " + getDados()[j];
                         break;
                     }
                 }
             }
             //en caso de utilizar 3 dados extra
-            for (int i = 1; i < partida.getDados().length; i++) {
+            for (int i = 1; i < getDados().length; i++) {
                 if (posicionLibre) {
                     break;
                 }
-                for (int j = 1; j < partida.getDados().length; j++) {
+                for (int j = 1; j < getDados().length; j++) {
                     if (posicionLibre) {
                         break;
                     }
-                    for (int k = 1; k < partida.getDados().length; k++) {
+                    for (int k = 1; k < getDados().length; k++) {
                         if (i != j && i != k && j != k) {
-                            posibleSolucion = partida.getDados()[0] + partida.getDados()[i] + partida.getDados()[j]
-                                    + partida.getDados()[k];
+                            posibleSolucion = getDados()[0] + getDados()[i] + getDados()[j]
+                                    + getDados()[k];
                         }
                         if (posibleSolucion <= 20) {
-                            posicionLibre = partida.posicionLibreMetodo(partida, posicionLibre, posibleSolucion);
+                            posicionLibre = posicionLibreMetodo(posicionLibre, posibleSolucion);
                             if (posicionLibre) {
                                 texto = "Posible solucion es utilizar posicion: "
                                         + posibleSolucion + ",ingresando: "
-                                        + partida.getDados()[i] + " " + partida.getDados()[j] + " "
-                                        + partida.getDados()[k];
+                                        + getDados()[i] + " " + getDados()[j] + " "
+                                        + getDados()[k];
                                 break;
                             }
                         }
@@ -163,15 +166,15 @@ public class Partida {
             }
             //en caso de utilizar 4 dados extra
             if (posicionLibre == false) {
-                posibleSolucion = partida.getDados()[0] + partida.getDados()[1] + partida.getDados()[2]
-                        + partida.getDados()[3] + partida.getDados()[4];
+                posibleSolucion = getDados()[0] + getDados()[1] + getDados()[2]
+                        + getDados()[3] + getDados()[4];
                 if (posibleSolucion <= 20) {
-                    posicionLibre = partida.posicionLibreMetodo(partida, posicionLibre, posibleSolucion);
+                    posicionLibre = posicionLibreMetodo(posicionLibre, posibleSolucion);
                     if (posicionLibre) {
                         texto = "Posible solucion es utilizar posicion: "
                                 + posibleSolucion + ",ingresando: "
-                                + partida.getDados()[1] + " " + partida.getDados()[2] + " "
-                                + partida.getDados()[3] + " " + partida.getDados()[4];
+                                + getDados()[1] + " " + getDados()[2] + " "
+                                + getDados()[3] + " " + getDados()[4];
                     }
 
                 }
@@ -182,9 +185,9 @@ public class Partida {
 
     public boolean tableroLleno(Partida partida) {
         boolean tableroLleno = true;
-        for (int i = 0; i < partida.getTablero().length; i++) {
-            for (int j = 0; j < partida.getTablero()[0].length; j++) {
-                if (partida.getTablero()[i][j] <= 20) {
+        for (int i = 0; i < getTablero().length; i++) {
+            for (int j = 0; j < getTablero()[0].length; j++) {
+                if (getTablero()[i][j] <= 20) {
                     tableroLleno = false;
                     break;
                 }
@@ -197,52 +200,52 @@ public class Partida {
         return tableroLleno;
     }
 
-    public int puntosJugadorUno(Partida partida, int x) {
+    public int contadorPuntos(int x) {
         int puntos = 0;
         int contador = 0;
         //recorre y cuenta los puntos en las filas
-        for (int i = 0; i < partida.getTablero().length; i++) {
-            for (int j = 0; j < partida.getTablero()[0].length; j++) {
-                if (partida.getTablero()[i][j] == x) {
+        for (int i = 0; i < getTablero().length; i++) {
+            for (int j = 0; j < getTablero()[0].length; j++) {
+                if (getTablero()[i][j] == x) {
                     contador++;
                 }
-                if (partida.getTablero()[i][j] != x && contador >= 3 || j == getTablero()[0].length - 1 && contador >= 3) {
+                if (getTablero()[i][j] != x && contador >= 3 || j == getTablero()[0].length - 1 && contador >= 3) {
                     puntos = puntos + contador;
                     contador = 0;
                 }
-                if (partida.getTablero()[i][j] != x && contador < 3 || j == getTablero()[0].length - 1 && contador < 3) {
+                if (getTablero()[i][j] != x && contador < 3 || j == getTablero()[0].length - 1 && contador < 3) {
                     contador = 0;
                 }
             }
         }
         //recorre y cuenta los puntos en las columnas
-        for (int i = 0; i < partida.getTablero()[0].length; i++) {
-            for (int j = 0; j < partida.getTablero().length; j++) {
-                if (partida.getTablero()[j][i] == x) {
+        for (int i = 0; i < getTablero()[0].length; i++) {
+            for (int j = 0; j < getTablero().length; j++) {
+                if (getTablero()[j][i] == x) {
                     contador++;
                 }
-                if (partida.getTablero()[j][i] != x && contador >= 3 || j == getTablero().length - 1 && contador >= 3) {
+                if (getTablero()[j][i] != x && contador >= 3 || j == getTablero().length - 1 && contador >= 3) {
                     puntos += contador;
                     contador = 0;
                 }
-                if (partida.getTablero()[j][i] != x && contador < 3 || j == getTablero().length - 1 && contador < 3) {
+                if (getTablero()[j][i] != x && contador < 3 || j == getTablero().length - 1 && contador < 3) {
                     contador = 0;
                 }
             }
         }
         //recorre diagonales paralelas a la principal(de izquierda a derecha)
         for (int k = -1; k < 3; k++) {
-            for (int i = 0; i < partida.getTablero().length; i++) {
-                for (int j = 0; j < partida.getTablero()[0].length; j++) {
+            for (int i = 0; i < getTablero().length; i++) {
+                for (int j = 0; j < getTablero()[0].length; j++) {
                     if (j - i == k) {
-                        if (partida.getTablero()[i][j] == x) {
+                        if (getTablero()[i][j] == x) {
                             contador++;
                         }
-                        if (partida.getTablero()[i][j] != x && contador >= 3) {
+                        if (getTablero()[i][j] != x && contador >= 3) {
                             puntos += contador;
                             contador = 0;
                         }
-                        if (partida.getTablero()[i][j] != x && contador < 3) {
+                        if (getTablero()[i][j] != x && contador < 3) {
                             contador = 0;
                         }
                     }
@@ -254,20 +257,20 @@ public class Partida {
             }
             contador = 0;
         }
-        
+
         //recorre diagonales perpendiculares de la principal
         for (int k = 2; k < 6; k++) {
-            for (int i = 0; i < partida.getTablero().length; i++) {
-                for (int j = 0; j < partida.getTablero()[0].length; j++) {
+            for (int i = 0; i < getTablero().length; i++) {
+                for (int j = 0; j < getTablero()[0].length; j++) {
                     if (j + i == k) {
-                        if (partida.getTablero()[i][j] == x) {
+                        if (getTablero()[i][j] == x) {
                             contador++;
                         }
-                        if (partida.getTablero()[i][j] != x && contador >= 3) {
+                        if (getTablero()[i][j] != x && contador >= 3) {
                             puntos += contador;
                             contador = 0;
                         }
-                        if (partida.getTablero()[i][j] != x && contador < 3) {
+                        if (getTablero()[i][j] != x && contador < 3) {
                             contador = 0;
                         }
                     }
@@ -279,8 +282,7 @@ public class Partida {
             }
             contador = 0;
         }
-        
-        
+
         return puntos;
     }
 

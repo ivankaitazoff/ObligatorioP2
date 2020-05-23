@@ -1,3 +1,7 @@
+//Nombres y numeros de estudiantes
+//Ivan kaitazoff: 233940
+//Sebastian Romelli: 222405
+
 package dominio;
 
 public class Jugador implements Comparable<Jugador>{
