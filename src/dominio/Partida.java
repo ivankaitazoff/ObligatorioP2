@@ -197,33 +197,35 @@ public class Partida {
         return tableroLleno;
     }
 
-    public int puntosJuadorUno(Partida partida) {
+    public int puntosJugadorUno(Partida partida, int x) {
         int puntos = 0;
         int contador = 0;
         //recorre y cuenta los puntos en las filas
         for (int i = 0; i < partida.getTablero().length; i++) {
-            contador = 0;
             for (int j = 0; j < partida.getTablero()[0].length; j++) {
-                if (partida.getTablero()[i][j] == 21) {
+                if (partida.getTablero()[i][j] == x) {
                     contador++;
-                } else if (partida.getTablero()[i][j] != 21 && contador > 3) {
+                } 
+                if (partida.getTablero()[i][j] != x && contador >= 3 || j == getTablero()[0].length - 1 && contador >= 3) {
                     puntos = puntos + contador;
                     contador = 0;
-                } else if (partida.getTablero()[i][j] != 21 && contador < 3) {
+                } 
+                if (partida.getTablero()[i][j] != x && contador < 3  || j == getTablero()[0].length - 1 && contador < 3) {
                     contador = 0;
                 }
             }
         }
         //recorre y cuenta los puntos en las columnas
         for (int i = 0; i < partida.getTablero()[0].length; i++) {
-            contador = 0;
             for (int j = 0; j < partida.getTablero().length; j++) {
-                if (partida.getTablero()[j][i] == 21) {
+                if (partida.getTablero()[j][i] == x) {
                     contador++;
-                } else if (partida.getTablero()[j][i] != 21 && contador > 3) {
-                    puntos = puntos + contador;
+                }
+                if (partida.getTablero()[j][i] != x && contador >= 3 || j == getTablero().length - 1 && contador >= 3) {
+                    puntos += contador;
                     contador = 0;
-                } else if (partida.getTablero()[j][i] != 21 && contador < 3) {
+                }
+                if (partida.getTablero()[j][i] != x && contador < 3 || j == getTablero().length - 1 && contador < 3) {
                     contador = 0;
                 }
             }

@@ -170,7 +170,8 @@ public class Interfaz {
         boolean fichaColocada = true;
         String opcion;
         int turno = 1;
-
+        int puntosJug1;
+        int puntosJug2;
         while (!terminarPartida) {
             mostrarTablero(partida);
             
@@ -180,6 +181,10 @@ public class Interfaz {
             } else if (test != true && fichaColocada == true) {
                 partida.setDadosRandom();
             }
+            puntosJug1 = partida.puntosJugadorUno(partida, 21);
+            puntosJug2 = partida.puntosJugadorUno(partida, 22);
+            System.out.println("Puntos del jugador 1: " + puntosJug1);
+            System.out.println("Puntos del jugador 2: " + puntosJug2);
             mostrarDados(partida);
             fichaColocada = false;
 
@@ -243,7 +248,7 @@ public class Interfaz {
                                 System.out.println("Error, los valores ingresados deben ser entre 1 y 6(incluidos)");
                                 arrayIntDados[i] = sistema.validacionNumero(1, 6);
                             }
-                            for (int j = 0; j < dadosSinUsar.length; j++) {
+                            for (int j = 1; j < dadosSinUsar.length; j++) {
                                 if (arrayIntDados[i] == dadosSinUsar[j]) {
                                     dadosSinUsar[j] = 0;
                                     dadoExiste = true;
@@ -294,7 +299,9 @@ public class Interfaz {
                     System.out.println(ayuda);
                     break;
             }
-        terminarPartida=partida.tableroLleno(partida);
+            if (!terminarPartida) {
+                terminarPartida=partida.tableroLleno(partida);
+            }
         }
         
     }
