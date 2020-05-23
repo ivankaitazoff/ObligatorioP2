@@ -205,12 +205,12 @@ public class Partida {
             for (int j = 0; j < partida.getTablero()[0].length; j++) {
                 if (partida.getTablero()[i][j] == x) {
                     contador++;
-                } 
+                }
                 if (partida.getTablero()[i][j] != x && contador >= 3 || j == getTablero()[0].length - 1 && contador >= 3) {
                     puntos = puntos + contador;
                     contador = 0;
-                } 
-                if (partida.getTablero()[i][j] != x && contador < 3  || j == getTablero()[0].length - 1 && contador < 3) {
+                }
+                if (partida.getTablero()[i][j] != x && contador < 3 || j == getTablero()[0].length - 1 && contador < 3) {
                     contador = 0;
                 }
             }
@@ -230,7 +230,57 @@ public class Partida {
                 }
             }
         }
+        //recorre diagonales paralelas a la principal(de izquierda a derecha)
+        for (int k = -1; k < 3; k++) {
+            for (int i = 0; i < partida.getTablero().length; i++) {
+                for (int j = 0; j < partida.getTablero()[0].length; j++) {
+                    if (j - i == k) {
+                        if (partida.getTablero()[i][j] == x) {
+                            contador++;
+                        }
+                        if (partida.getTablero()[i][j] != x && contador >= 3) {
+                            puntos += contador;
+                            contador = 0;
+                        }
+                        if (partida.getTablero()[i][j] != x && contador < 3) {
+                            contador = 0;
+                        }
+                    }
 
+                }
+            }
+            if (contador >= 3) {
+                puntos += contador;
+            }
+            contador = 0;
+        }
+        
+        //recorre diagonales perpendiculares de la principal
+        for (int k = 2; k < 6; k++) {
+            for (int i = 0; i < partida.getTablero().length; i++) {
+                for (int j = 0; j < partida.getTablero()[0].length; j++) {
+                    if (j + i == k) {
+                        if (partida.getTablero()[i][j] == x) {
+                            contador++;
+                        }
+                        if (partida.getTablero()[i][j] != x && contador >= 3) {
+                            puntos += contador;
+                            contador = 0;
+                        }
+                        if (partida.getTablero()[i][j] != x && contador < 3) {
+                            contador = 0;
+                        }
+                    }
+
+                }
+            }
+            if (contador >= 3) {
+                puntos += contador;
+            }
+            contador = 0;
+        }
+        
+        
         return puntos;
     }
 

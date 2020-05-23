@@ -158,7 +158,7 @@ public class Interfaz {
         System.out.println("En caso de querer utilizar modo test ingresar 'TEST', en caso de no querer");
         String modoTest = sistema.validarString();
         boolean test = false;
-        if (modoTest == "TEST") {
+        if (modoTest.equalsIgnoreCase("TEST")) {
             test = true;
         }
 
@@ -167,16 +167,17 @@ public class Interfaz {
 
     public static void menuPartida(Sistema sistema, Partida partida, boolean test) {
         boolean terminarPartida = false;
+        boolean partidaAbandonada = false;
         boolean fichaColocada = true;
         String opcion;
         int turno = 1;
-        int puntosJug1;
-        int puntosJug2;
+        int puntosJug1=0;
+        int puntosJug2=0;
         while (!terminarPartida) {
             mostrarTablero(partida);
             
             if (test == true && fichaColocada == true) {
-                System.out.println("LA PARTIDA SE ENCUENTRA EN MODO TEST");
+                System.out.println("LA PARTIDA SE ENCUENTRA EN MODO TEST, INGRESAR DADOS DE A UNO");
                 partida.setDadosTest(partida, sistema);
             } else if (test != true && fichaColocada == true) {
                 partida.setDadosRandom();
@@ -293,6 +294,7 @@ public class Interfaz {
                         partida.getJugador1().setPartidasGanadas(partidasGanadasJ1 + 1);
                     }
                     terminarPartida = true;
+                    partidaAbandonada = true;
                     break;
                 case "A":
                     String ayuda = partida.pedidoAyuda(partida);
@@ -301,9 +303,21 @@ public class Interfaz {
             }
             if (!terminarPartida) {
                 terminarPartida=partida.tableroLleno(partida);
-            }
+                }           
         }
-        
+        if (partidaAbandonada == false && terminarPartida) {
+                    if (puntosJug1 > puntosJug2) {
+                        int partidasGanadasJ1 = partida.getJugador1().getPartidasGanadas();
+                        partida.getJugador1().setPartidasGanadas(partidasGanadasJ1 + 1);
+                        System.out.println("Juego terminado, ganador jugador 1 con: "+puntosJug1+" puntos");
+                    }
+                    else if(puntosJug2 > puntosJug1){
+                        int partidasGanadasJ2 = partida.getJugador2().getPartidasGanadas();
+                        partida.getJugador2().setPartidasGanadas(partidasGanadasJ2 + 1);
+                        System.out.println("Juego terminado, ganador jugador 2 con: "+puntosJug2+" puntos");
+                    }
+                }
+        System.out.println("");
     }
 
     public static void mostrarDados(Partida partida) {
