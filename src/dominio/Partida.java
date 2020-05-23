@@ -98,85 +98,138 @@ public class Partida {
         return posicionLibre;
     }
 
-    public String pedidoAyuda(Partida partida){
-        String texto =  "No hay jugadas posibles";;
+    public String pedidoAyuda(Partida partida) {
+        String texto = "No hay jugadas posibles";;
         int posibleSolucion = 0;
-                    boolean posicionLibre = false;
-                    //calculo para usar 1 dado extra
-                    for (int i = 1; i < partida.getDados().length; i++) {
-                        if (posicionLibre) {
-                            break;
+        boolean posicionLibre = false;
+        //calculo para usar 1 dado extra
+        for (int i = 1; i < partida.getDados().length; i++) {
+            if (posicionLibre) {
+                break;
+            }
+            posibleSolucion = partida.getDados()[0] + partida.getDados()[i];
+            posicionLibre = partida.posicionLibreMetodo(partida, posicionLibre, posibleSolucion);
+            if (posicionLibre) {
+                texto = "Posible solucion es utilizar posicion: "
+                        + posibleSolucion + ",ingresando: "
+                        + partida.getDados()[i];
+            }
+        }
+        //calculo para el caso de usar 2 dados extra
+        if (posicionLibre == false) {
+            for (int i = 1; i < partida.getDados().length; i++) {
+                if (posicionLibre) {
+                    break;
+                }
+                for (int j = 1; j < partida.getDados().length; j++) {
+                    if (i != j) {
+                        posibleSolucion = partida.getDados()[0] + partida.getDados()[i] + partida.getDados()[j];
+                    }
+                    posicionLibre = partida.posicionLibreMetodo(partida, posicionLibre, posibleSolucion);
+                    if (posicionLibre) {
+                        texto = "Posible solucion es utilizar posicion: "
+                                + posibleSolucion + ",ingresando: "
+                                + partida.getDados()[i] + " " + partida.getDados()[j];
+                        break;
+                    }
+                }
+            }
+            //en caso de utilizar 3 dados extra
+            for (int i = 1; i < partida.getDados().length; i++) {
+                if (posicionLibre) {
+                    break;
+                }
+                for (int j = 1; j < partida.getDados().length; j++) {
+                    if (posicionLibre) {
+                        break;
+                    }
+                    for (int k = 1; k < partida.getDados().length; k++) {
+                        if (i != j && i != k && j != k) {
+                            posibleSolucion = partida.getDados()[0] + partida.getDados()[i] + partida.getDados()[j]
+                                    + partida.getDados()[k];
                         }
-                        posibleSolucion = partida.getDados()[0] + partida.getDados()[i];
-                        posicionLibre = partida.posicionLibreMetodo(partida, posicionLibre, posibleSolucion);
-                        if (posicionLibre) {
-                            texto = "Posible solucion es utilizar posicion: "
-                                    + posibleSolucion + ",ingresando: "
-                                    + partida.getDados()[i];
+                        if (posibleSolucion <= 20) {
+                            posicionLibre = partida.posicionLibreMetodo(partida, posicionLibre, posibleSolucion);
+                            if (posicionLibre) {
+                                texto = "Posible solucion es utilizar posicion: "
+                                        + posibleSolucion + ",ingresando: "
+                                        + partida.getDados()[i] + " " + partida.getDados()[j] + " "
+                                        + partida.getDados()[k];
+                                break;
+                            }
                         }
                     }
-                    //calculo para el caso de usar 2 dados extra
-                    if (posicionLibre == false) {
-                        for (int i = 1; i < partida.getDados().length; i++) {
-                            if (posicionLibre) {
-                                break;
-                            }
-                            for (int j = 1; j < partida.getDados().length; j++) {
-                                if (i != j) {
-                                    posibleSolucion = partida.getDados()[0] + partida.getDados()[i] + partida.getDados()[j];
-                                }
-                                posicionLibre = partida.posicionLibreMetodo(partida, posicionLibre, posibleSolucion);
-                                if (posicionLibre) {
-                                    texto = "Posible solucion es utilizar posicion: "
-                                            + posibleSolucion + ",ingresando: "
-                                            + partida.getDados()[i] + " " + partida.getDados()[j];
-                                    break;
-                                }
-                            }
-                        }
-                        //en caso de utilizar 3 dados extra
-                        for (int i = 1; i < partida.getDados().length; i++) {
-                            if (posicionLibre) {
-                                break;
-                            }
-                            for (int j = 1; j < partida.getDados().length; j++) {
-                                if (posicionLibre) {
-                                    break;
-                                }
-                                for (int k = 1; k < partida.getDados().length; k++) {
-                                    if (i != j && i != k && j != k) {
-                                        posibleSolucion = partida.getDados()[0] + partida.getDados()[i] + partida.getDados()[j]
-                                                + partida.getDados()[k];
-                                    }
-                                    if (posibleSolucion <= 20) {
-                                        posicionLibre = partida.posicionLibreMetodo(partida, posicionLibre, posibleSolucion);
-                                        if (posicionLibre) {
-                                            texto = "Posible solucion es utilizar posicion: "
-                                                    + posibleSolucion + ",ingresando: "
-                                                    + partida.getDados()[i] + " " + partida.getDados()[j] + " "
-                                                    + partida.getDados()[k];
-                                            break;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        //en caso de utilizar 4 dados extra
-                        if (posicionLibre == false) {
-                            posibleSolucion = partida.getDados()[0] + partida.getDados()[1] + partida.getDados()[2]
-                                    + partida.getDados()[3] + partida.getDados()[4];
-                            if (posibleSolucion <= 20) {
-                                posicionLibre = partida.posicionLibreMetodo(partida, posicionLibre, posibleSolucion);
-                                if (posicionLibre) {
-                                    texto = "Posible solucion es utilizar posicion: "
-                                            + posibleSolucion + ",ingresando: "
-                                            + partida.getDados()[1] + " " + partida.getDados()[2] + " "
-                                            + partida.getDados()[3] + " " + partida.getDados()[4];
-                                }
+                }
+            }
+            //en caso de utilizar 4 dados extra
+            if (posicionLibre == false) {
+                posibleSolucion = partida.getDados()[0] + partida.getDados()[1] + partida.getDados()[2]
+                        + partida.getDados()[3] + partida.getDados()[4];
+                if (posibleSolucion <= 20) {
+                    posicionLibre = partida.posicionLibreMetodo(partida, posicionLibre, posibleSolucion);
+                    if (posicionLibre) {
+                        texto = "Posible solucion es utilizar posicion: "
+                                + posibleSolucion + ",ingresando: "
+                                + partida.getDados()[1] + " " + partida.getDados()[2] + " "
+                                + partida.getDados()[3] + " " + partida.getDados()[4];
+                    }
 
-                            }
-                        }
-                    }
-                    return texto;    
+                }
+            }
+        }
+        return texto;
     }
+
+    public boolean tableroLleno(Partida partida) {
+        boolean tableroLleno = true;
+        for (int i = 0; i < partida.getTablero().length; i++) {
+            for (int j = 0; j < partida.getTablero()[0].length; j++) {
+                if (partida.getTablero()[i][j] <= 20) {
+                    tableroLleno = false;
+                    break;
+                }
+
+            }
+            if (tableroLleno == false) {
+                break;
+            }
+        }
+        return tableroLleno;
+    }
+
+    public int puntosJuadorUno(Partida partida) {
+        int puntos = 0;
+        int contador = 0;
+        //recorre y cuenta los puntos en las filas
+        for (int i = 0; i < partida.getTablero().length; i++) {
+            contador = 0;
+            for (int j = 0; j < partida.getTablero()[0].length; j++) {
+                if (partida.getTablero()[i][j] == 21) {
+                    contador++;
+                } else if (partida.getTablero()[i][j] != 21 && contador > 3) {
+                    puntos = puntos + contador;
+                    contador = 0;
+                } else if (partida.getTablero()[i][j] != 21 && contador < 3) {
+                    contador = 0;
+                }
+            }
+        }
+        //recorre y cuenta los puntos en las columnas
+        for (int i = 0; i < partida.getTablero()[0].length; i++) {
+            contador = 0;
+            for (int j = 0; j < partida.getTablero().length; j++) {
+                if (partida.getTablero()[j][i] == 21) {
+                    contador++;
+                } else if (partida.getTablero()[j][i] != 21 && contador > 3) {
+                    puntos = puntos + contador;
+                    contador = 0;
+                } else if (partida.getTablero()[j][i] != 21 && contador < 3) {
+                    contador = 0;
+                }
+            }
+        }
+
+        return puntos;
+    }
+
 }

@@ -173,6 +173,7 @@ public class Interfaz {
 
         while (!terminarPartida) {
             mostrarTablero(partida);
+            
             if (test == true && fichaColocada == true) {
                 System.out.println("LA PARTIDA SE ENCUENTRA EN MODO TEST");
                 partida.setDadosTest(partida, sistema);
@@ -293,7 +294,9 @@ public class Interfaz {
                     System.out.println(ayuda);
                     break;
             }
+        terminarPartida=partida.tableroLleno(partida);
         }
+        
     }
 
     public static void mostrarDados(Partida partida) {
