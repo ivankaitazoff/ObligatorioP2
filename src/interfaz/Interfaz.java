@@ -193,9 +193,9 @@ public class Interfaz {
             System.out.println("X-Abandonar partida");
             System.out.println("A-Ayuda");
             if (turno % 2 == 1) {
-                System.out.println("Turno de jugador 1");
+                System.out.println("Turno de jugador 1(COLOR ROJO)");
             } else {
-                System.out.println("Turno de jugador 2");
+                System.out.println("Turno de jugador 2(COLOR AZUL)");
             }
 
             System.out.println(" ");

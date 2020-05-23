@@ -1,10 +1,9 @@
 //Nombres y numeros de estudiantes
 //Ivan kaitazoff: 233940
 //Sebastian Romelli: 222405
-
 package dominio;
 
-public class Jugador implements Comparable<Jugador>{
+public class Jugador implements Comparable<Jugador> {
 
     private String nombre;
     private int edad;
@@ -67,7 +66,7 @@ public class Jugador implements Comparable<Jugador>{
 
     @Override
     public int compareTo(Jugador jugador) {
-    return  jugador.getPartidasGanadas() - this.getPartidasGanadas();
-        
+        return jugador.getPartidasGanadas() - this.getPartidasGanadas();
+
     }
 }
