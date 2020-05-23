@@ -295,7 +295,7 @@ public class Interfaz {
                     partidaAbandonada = true;
                     break;
                 case "A":
-                    String ayuda = partida.pedidoAyuda(partida);
+                    String ayuda = partida.pedidoAyuda();
                     System.out.println(ayuda);
                     break;
             }
@@ -309,12 +309,18 @@ public class Interfaz {
             if (puntosJug1 > puntosJug2) {
                 int partidasGanadasJ1 = partida.getJugador1().getPartidasGanadas();
                 partida.getJugador1().setPartidasGanadas(partidasGanadasJ1 + 1);
-                System.out.println("Juego terminado, ganador jugador 1 con: " + puntosJug1 + " puntos");
+                System.out.println("");
+                System.out.println("Partida terminada, tablero lleno");
+                System.out.println("Ganador jugador 1 con: " + puntosJug1 + " puntos");
             } else if (puntosJug2 > puntosJug1) {
                 int partidasGanadasJ2 = partida.getJugador2().getPartidasGanadas();
                 partida.getJugador2().setPartidasGanadas(partidasGanadasJ2 + 1);
-                System.out.println("Juego terminado, ganador jugador 2 con: " + puntosJug2 + " puntos");
+                System.out.println("");
+                System.out.println("Partida terminada, tablero lleno");
+                System.out.println("Ganador jugador 2 con: " + puntosJug2 + " puntos");
             } else {
+                System.out.println("");
+                System.out.println("Partida terminada, tablero lleno");
                 System.out.println("Empate, no hay ganador");
             }
         }

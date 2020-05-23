@@ -101,7 +101,7 @@ public class Partida {
         return posicionLibre;
     }
 
-    public String pedidoAyuda(Partida partida) {
+    public String pedidoAyuda() {
         String texto = "No hay jugadas posibles";;
         int posibleSolucion = 0;
         boolean posicionLibre = false;
